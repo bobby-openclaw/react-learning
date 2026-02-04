@@ -2,6 +2,8 @@
 
 > Before you write a single line of React, understand how it thinks. This chapter has **zero code to write** — just concepts to absorb. Everything here will click deeper once you start building.
 
+> **📌 This course uses React 19** (released December 2024). We'll use its latest APIs throughout. Where React 19 simplifies something that used to be painful, we'll show the "before vs after" so you understand what changed and why.
+
 ---
 
 ## 🧠 Concepts
