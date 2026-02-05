@@ -2,6 +2,8 @@
 
 > You've built TaskFlow. Now make sure it *stays* working. Testing isn't about proving your code works today — it's about catching when it breaks tomorrow.
 
+> **📌 Where we are:** TaskFlow is complete — routing, forms, shadcn UI, theming, optimized performance (Ch 16). It works great... until someone refactors a hook and breaks task creation. This chapter adds the safety net.
+
 ---
 
 ## 🧠 Concepts

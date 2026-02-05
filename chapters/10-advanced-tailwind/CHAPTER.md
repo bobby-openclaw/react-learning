@@ -2,6 +2,8 @@
 
 > You've got the fundamentals — utility classes, responsive design, state modifiers. Now let's go deeper: custom themes, dark mode, animations, and patterns that turn a "looks okay" app into a polished product. This is where TaskFlow starts to feel *designed*.
 
+> **📌 Where we are:** TaskFlow has Tailwind basics (Ch 9) — layout, spacing, typography, responsive breakpoints. The theme toggle from Ch 5 exists but doesn't work with Tailwind's dark mode yet. Let's connect them and add polish.
+
 ---
 
 ## 🧠 Concepts

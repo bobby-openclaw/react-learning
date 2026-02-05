@@ -2,6 +2,8 @@
 
 > Core components (Button, Input, Card) are the foundation. Now we add the *interactive* layer — dialogs for task creation, dropdown menus for actions, a command palette for power users, and a mobile sidebar. These components transform TaskFlow from "functional" to "feels like a real product."
 
+> **📌 Where we are:** TaskFlow uses shadcn Button, Input, Card, Badge (Ch 11). Task creation still uses a plain form on the page. Actions (edit, delete) are individual buttons. There's no mobile menu. This chapter adds the UI patterns that make apps feel polished.
+
 ---
 
 ## 🧠 Concepts

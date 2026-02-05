@@ -390,6 +390,36 @@ Do you need to share state between components?
 
 ---
 
+### ⚠️ Common Pitfall: The Context Re-render Trap
+
+This trips up everyone. When context value changes, **every** component that consumes it re-renders — even if they only use part of the value:
+
+```tsx
+// ❌ One big context — filter change re-renders EVERYTHING
+const TaskContext = createContext({ 
+  tasks: [],       // TaskList uses this
+  filter: 'all',   // TaskFilters uses this  
+  addTask: ...,    // TaskForm uses this
+});
+
+// When filter changes: TaskList, TaskFilters, TaskForm ALL re-render
+// Even though TaskList doesn't care about filter!
+```
+
+**The fix:** Split by update frequency:
+
+```tsx
+// ✅ Separate contexts
+const TaskDataContext = createContext({ tasks: [], addTask, toggleTask, deleteTask });
+const TaskFilterContext = createContext({ filter: 'all', setFilter, filteredTasks });
+
+// Now: filter change only re-renders components using TaskFilterContext
+```
+
+**Rule of thumb:** If two pieces of state change at different rates, they probably belong in different contexts. Theme changes rarely. Filter changes with every click. Tasks change on user action. Don't bundle them.
+
+---
+
 ## 💡 Examples
 
 ### Example 1: Auth Context

@@ -2,6 +2,8 @@
 
 > You've been writing CSS the traditional way — class names, separate files, specificity battles. Tailwind CSS flips the model: instead of writing custom CSS, you compose pre-built utility classes directly in your markup. It sounds weird. Then it clicks, and you never go back.
 
+> **📌 Where we are:** TaskFlow is fully functional — routing (Ch 7), validated forms (Ch 8), custom hooks, context. But it looks like a 1995 website. This chapter (and Ch 10) fix that. By the end, TaskFlow will have a modern, responsive design.
+
 ---
 
 ## 🧠 Concepts

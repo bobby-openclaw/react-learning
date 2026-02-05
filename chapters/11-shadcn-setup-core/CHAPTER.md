@@ -2,6 +2,8 @@
 
 > You've built TaskFlow's UI from scratch with Tailwind. It works, but you're reinventing the wheel — building buttons with consistent variants, accessible inputs with proper focus states, card layouts that handle edge cases. **shadcn/ui** gives you production-quality, accessible components that you *own* (not import from a library). It's copy-paste, not a dependency.
 
+> **📌 Where we are:** TaskFlow has Tailwind styling with dark mode (Ch 9-10). The UI is custom-built and looks decent, but we're maintaining our own button variants, input states, and card styles. Time to replace that handcrafted code with battle-tested shadcn components.
+
 ---
 
 ## 🧠 Concepts

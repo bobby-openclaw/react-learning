@@ -2,6 +2,8 @@
 
 > Your TaskFlow app currently lives on a single page. Real apps have *pages* — a dashboard, detail views, settings. React Router gives your SPA the feel of a traditional website with URLs, back/forward navigation, and bookmarkable views — without full page reloads.
 
+> **📌 Where we are:** TaskFlow has clean custom hooks (Ch 6) — `useLocalStorage`, `useTasks`, `useFilteredTasks`, `useTheme`. Everything works, but it's all crammed onto one page. You can't link to a specific task or have a dedicated settings page.
+
 > **📌 We're using React Router v7** — the latest version with a modernized API. If you see v5/v6 patterns online (like `<Switch>` or `element={}` without JSX), ignore them.
 
 ---

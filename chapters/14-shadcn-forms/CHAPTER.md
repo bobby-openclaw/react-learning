@@ -1,8 +1,8 @@
 # Chapter 14: Forms the shadcn Way
 
-> Forms are where users *give* data to your app. Get them wrong, and people leave. Get them right, and they barely notice — which is the highest compliment. This chapter rebuilds TaskFlow's forms using shadcn's Form component, which elegantly layers React Hook Form, Zod validation, and accessible UI into one cohesive system.
+> In Chapter 8, you learned React Hook Form and Zod. In Chapters 11-12, you learned shadcn components. Now we combine them. shadcn's `<Form>` component wraps React Hook Form with accessible, styled primitives — labels auto-link to inputs, errors appear in the right place, and you write half the code.
 
-> **📌 Prerequisite:** Chapters 8 (Forms & Validation fundamentals), 11-12 (shadcn setup), and 13 (DataTable). You should understand Zod schemas and React Hook Form basics.
+> **📌 Where we are:** TaskFlow has a DataTable (Ch 13), shadcn UI throughout (Ch 11-12), and React Hook Form with Zod validation (Ch 8). The form *works*, but it's not using shadcn's form components yet. This chapter fixes that and adds richer fields (date pickers, comboboxes, selects).
 
 ---
 

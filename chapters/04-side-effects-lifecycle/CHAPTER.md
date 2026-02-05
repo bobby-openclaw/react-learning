@@ -223,6 +223,83 @@ This only happens in development. Production runs effects once.
 
 ---
 
+### ⚠️ Common useEffect Mistakes
+
+These mistakes account for 90% of useEffect bugs. Avoid them:
+
+**Mistake 1: Using effects for derived state**
+
+```tsx
+// ❌ WRONG — using effect to compute derived state
+const [items, setItems] = useState([]);
+const [total, setTotal] = useState(0);
+
+useEffect(() => {
+  setTotal(items.reduce((sum, item) => sum + item.price, 0));
+}, [items]);
+
+// ✅ RIGHT — derive during render
+const [items, setItems] = useState([]);
+const total = items.reduce((sum, item) => sum + item.price, 0);
+// No effect needed! Just compute it.
+```
+
+**Mistake 2: Using effects for user events**
+
+```tsx
+// ❌ WRONG — modeling a click as state + effect
+const [submitted, setSubmitted] = useState(false);
+
+useEffect(() => {
+  if (submitted) {
+    saveData();
+    showToast('Saved!');
+  }
+}, [submitted]);
+
+const handleClick = () => setSubmitted(true);
+
+// ✅ RIGHT — just do it in the handler
+const handleClick = () => {
+  saveData();
+  showToast('Saved!');
+};
+```
+
+**Mistake 3: Missing dependencies**
+
+```tsx
+// ❌ WRONG — missing userId in deps (uses stale value!)
+useEffect(() => {
+  fetchUser(userId).then(setUser);
+}, []); // ESLint will warn you
+
+// ✅ RIGHT — include all values read inside the effect
+useEffect(() => {
+  fetchUser(userId).then(setUser);
+}, [userId]);
+```
+
+**Mistake 4: Object/array dependencies causing infinite loops**
+
+```tsx
+// ❌ WRONG — new object every render = infinite loop!
+useEffect(() => {
+  fetchData(options);
+}, [{ page: 1, limit: 10 }]); // New object reference each render!
+
+// ✅ RIGHT — use primitive values
+const page = 1;
+const limit = 10;
+useEffect(() => {
+  fetchData({ page, limit });
+}, [page, limit]);
+```
+
+The React docs article [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect) is essential reading. Bookmark it.
+
+---
+
 ### 5. Data Fetching: The Old Way (useEffect + useState)
 
 The traditional pattern for fetching data:

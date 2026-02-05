@@ -1,40 +1,37 @@
 # Chapter 8: Forms & Validation
 
-> Forms are where users *give* data to your app. They're also where the most bugs hide — validation edge cases, submit-while-loading races, stale error messages. This chapter arms you with React Hook Form for ergonomic form handling, Zod for bulletproof validation, and React 19's new form primitives that eliminate boilerplate you didn't even know you were writing.
+> TaskFlow's simple `TaskForm` from Chapter 2 works, but it won't scale. What happens when you need 10 fields? Validation? Error messages? Loading states? This chapter upgrades your form game with React Hook Form, Zod schemas, and React 19's new form primitives that eliminate boilerplate you didn't know you were writing.
 
-> **📌 This chapter introduces several 🆕 React 19 features** — `useActionState`, `useFormStatus`, `useOptimistic`, and native `<form action>`. These are game-changers for form handling.
+> **📌 Where we are:** TaskFlow has routing (Ch 7), a task detail page, and the Settings page. The `TaskForm` is still using basic controlled inputs with `useState`. Time to level up.
+
+> **📌 React 19 features introduced:** `useActionState`, `useFormStatus`, `useOptimistic`, and native `<form action>`. These are game-changers.
 
 ---
 
 ## 🧠 Concepts
 
-### 1. Controlled vs Uncontrolled — Quick Recap
+### 1. Why Your Current Form Won't Scale
 
-You've seen both patterns:
-
-**Controlled** — React owns the form state. Every keystroke triggers a state update and re-render.
+In Chapter 2, you built `TaskForm` with controlled inputs — `useState` for each field, `onChange` handlers, manual validation. That's fine for one or two fields, but:
 
 ```tsx
-const [name, setName] = useState("");
-<input value={name} onChange={(e) => setName(e.target.value)} />
+// Chapter 2 style — gets painful fast
+const [title, setTitle] = useState("");
+const [description, setDescription] = useState("");
+const [priority, setPriority] = useState("medium");
+const [dueDate, setDueDate] = useState("");
+const [category, setCategory] = useState("");
+const [assignee, setAssignee] = useState("");
+// ... 6 useState calls, 6 onChange handlers, re-renders on every keystroke
 ```
 
-**Uncontrolled** — The DOM owns the state. You read values when needed (on submit).
+**The scaling problems:**
+- **Re-render cost:** Every keystroke re-renders the entire form (all 6 fields)
+- **Validation spaghetti:** Where do you put "title must be 3+ chars"? When do you show the error?
+- **Submit state:** Is it submitting? Did it fail? How do you disable the button?
+- **Type safety:** How do you ensure the submitted data matches what the API expects?
 
-```tsx
-const inputRef = useRef<HTMLInputElement>(null);
-// Read value: inputRef.current?.value
-<input ref={inputRef} defaultValue="" />
-```
-
-| Aspect | Controlled | Uncontrolled |
-|--------|-----------|-------------|
-| Re-renders | Every keystroke | Only on submit |
-| Validation | Real-time | On submit |
-| Complexity | More boilerplate | Less boilerplate |
-| Use case | Complex forms, live validation | Simple forms, performance-critical |
-
-**The problem with controlled forms at scale:** A form with 15 fields means 15 `useState` calls, 15 `onChange` handlers, and 15 re-renders per keystroke. That's where React Hook Form comes in.
+React Hook Form + Zod solve all of these. Let's see how.
 
 ### 2. React Hook Form — The Sweet Spot
 

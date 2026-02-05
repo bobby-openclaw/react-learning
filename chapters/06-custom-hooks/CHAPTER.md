@@ -2,6 +2,8 @@
 
 > React's real superpower isn't components — it's the ability to extract and share **stateful logic** without changing your component tree. Custom hooks are how you build your own toolkit.
 
+> **📌 Where we are:** TaskFlow has components (Ch 3), state management (Ch 2), effects with localStorage persistence (Ch 4), and Context for theme + global task state (Ch 5). But the logic is scattered — `useState` and `useEffect` calls are copy-pasted across components. Time to clean house.
+
 ---
 
 ## 🧠 Concepts
