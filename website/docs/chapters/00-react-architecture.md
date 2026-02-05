@@ -11,7 +11,6 @@ title: "Chapter 0: React Architecture & Mental Models"
 > **📌 This course uses React 19** (released December 2024). We'll use its latest APIs throughout. Where React 19 simplifies something that used to be painful, we'll show the "before vs after" so you understand what changed and why.
 
 ---
-id: 00-react-architecture
 
 ## 🧠 Concepts
 
@@ -65,7 +64,6 @@ You never touch the DOM. You just say "given this data, here's what the UI looks
 **This is declarative programming.** It's the single most important mental shift in React.
 
 ---
-id: 00-react-architecture
 
 ### 2. UI as a Function of State
 
@@ -94,7 +92,6 @@ const Counter = ({ count }) => {    // Input: state/props
 **Key insight:** You never *modify* the UI. You modify the *state*, and React recomputes the UI. This is why it's called React — it *reacts* to state changes.
 
 ---
-id: 00-react-architecture
 
 ### 3. Components: The Building Blocks
 
@@ -140,7 +137,6 @@ Parent ←─callback─ Child (child calls a function from parent)
 **Why one-way?** Two-way data binding (like old Angular) sounds convenient, but creates spaghetti — when anything can change anything, debugging is hell. One-way flow means you can trace any piece of data back to its source.
 
 ---
-id: 00-react-architecture
 
 ### 4. JSX: Not HTML, Not a String
 
@@ -178,7 +174,6 @@ Key JSX differences from HTML:
 - CamelCase for attributes: `onClick`, `onChange`, `tabIndex`
 
 ---
-id: 00-react-architecture
 
 ### 5. The Virtual DOM & Reconciliation
 
@@ -252,7 +247,6 @@ It does NOT re-create the entire DOM. That's the performance win.
 **Why not just update the real DOM directly?** Because DOM operations are expensive. By batching and minimizing changes, React avoids unnecessary layout recalculations, repaints, and reflows.
 
 ---
-id: 00-react-architecture
 
 ### 6. Rendering ≠ Painting
 
@@ -274,7 +268,6 @@ This is why "unnecessary re-renders" are usually not a performance problem — t
 (We'll revisit this in Ch 16 - Performance, where you'll learn when re-renders *do* matter.)
 
 ---
-id: 00-react-architecture
 
 ### 7. State: The Engine of Change
 
@@ -312,7 +305,6 @@ setTasks([...tasks, newTask]); // New reference → React knows something change
 This immutability rule trips up every beginner. Burn it into your brain now.
 
 ---
-id: 00-react-architecture
 
 ### 8. The React Ecosystem (What Goes Where)
 
@@ -332,7 +324,6 @@ React itself is tiny — it only handles the component model and rendering. Ever
 Don't feel overwhelmed — we'll add these **one at a time** as the project needs them. For now, just know that React is the foundation, not the whole house.
 
 ---
-id: 00-react-architecture
 
 ## 💡 Key Takeaways
 
@@ -348,7 +339,6 @@ Before moving to Chapter 1, make sure these feel solid:
 8. **React is small** — the ecosystem provides everything else
 
 ---
-id: 00-react-architecture
 
 ## 🧪 Challenge: Spot the Mental Model
 
@@ -362,7 +352,6 @@ No code to write yet! Instead, go look at any React code online (a GitHub projec
 If you can answer these, you're ready for Chapter 1.
 
 ---
-id: 00-react-architecture
 
 ## 📚 Further Reading (optional)
 
@@ -372,7 +361,6 @@ id: 00-react-architecture
 - [Kent C. Dodds: Fix the slow render before you fix the re-render](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render)
 
 ---
-id: 00-react-architecture
 
 **Next up: [Chapter 1 — Setup & Your First Component →](/chapters/01-setup-first-component)**
 

@@ -123,7 +123,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-function CreateTaskDialog() {
+const CreateTaskDialog = () => {
   const [open, setOpen] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -190,7 +190,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-function TaskActions({ task }: { task: Task }) {
+const TaskActions = ({ task }: { task: Task }) => {
   const navigate = useNavigate();
   const { deleteTask, addTask } = useContext(TaskContext);
 
@@ -260,7 +260,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 
-function CommandPalette() {
+const CommandPalette = () => {
   const [open, setOpen] = useState(false);
   const { tasks } = useContext(TaskContext);
   const navigate = useNavigate();
@@ -339,7 +339,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 
-function MobileSidebar() {
+const MobileSidebar = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -407,7 +407,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-function DeleteTaskButton({ taskId, taskTitle }: {
+const DeleteTaskButton = ({ taskId, taskTitle }: {
   taskId: string;
   taskTitle: string;
 }) {
@@ -463,7 +463,7 @@ import {
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 
-function TaskPreview({ task }: { task: Task }) {
+const TaskPreview = ({ task }: { task: Task }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -555,7 +555,7 @@ import TaskForm from "./TaskForm";
 import { TaskContext } from "@/context/TaskContext";
 import type { TaskFormData } from "@/schemas/task";
 
-export default function CreateTaskDialog() {
+const CreateTaskDialog = () => {
   const [open, setOpen] = useState(false);
   const { addTask } = useContext(TaskContext);
 
@@ -624,7 +624,7 @@ interface TaskCardProps {
   className?: string;
 }
 
-export default function TaskCard({ task, className }: TaskCardProps) {
+const TaskCard = ({ task, className }: TaskCardProps) => {
   const navigate = useNavigate();
   const { deleteTask, addTask } = useContext(TaskContext);
 
@@ -743,7 +743,7 @@ import {
 } from "@/components/ui/command";
 import { TaskContext } from "@/context/TaskContext";
 
-export default function CommandPalette() {
+const CommandPalette = () => {
   const [open, setOpen] = useState(false);
   const { tasks } = useContext(TaskContext);
   const navigate = useNavigate();
@@ -840,7 +840,7 @@ import {
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
 
-export default function MobileSidebar() {
+const MobileSidebar = () => {
   const [open, setOpen] = useState(false);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
@@ -906,7 +906,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
   }`;
 
-export default function Layout() {
+const Layout = () => {
   return (
     <TooltipProvider>
       <div className="flex h-screen bg-background">
@@ -1028,6 +1028,6 @@ export default function Layout() {
 
 ---
 
-**Next up: [Chapter 13 — Data Display →](../13-data-display/CHAPTER.md)**
+**Next up: [Chapter 13 — Data Display →](/chapters/13-data-display)**
 
 Tables, lists, sorting, filtering, and pagination — all the patterns for displaying collections of data beautifully.

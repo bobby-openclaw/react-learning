@@ -81,7 +81,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 // 2. Provider component — manages the state and provides it
-function ThemeProvider({ children }: { children: React.ReactNode }) {
+const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   
   const toggleTheme = () => {
@@ -105,7 +105,7 @@ function useTheme(): ThemeContextType {
 }
 
 // 4. Use it anywhere!
-function Header() {
+const Header = () => {
   const { theme, toggleTheme } = useTheme();
   return (
     <header className={`header-${theme}`}>
@@ -171,7 +171,7 @@ function useTheme(): ThemeContextType {
 > ```tsx
 > import { use } from 'react';
 >
-> function Tooltip({ show }: { show: boolean }) {
+> const Tooltip = ({ show }: { show: boolean }) => {
 >   if (!show) return null; // early return
 >
 >   // ✅ use() works after early return — useContext wouldn't!
@@ -185,14 +185,14 @@ function useTheme(): ThemeContextType {
 >
 > ```tsx
 > // ❌ useContext — can't call after early return
-> function Tooltip({ show }: { show: boolean }) {
+> const Tooltip = ({ show }: { show: boolean }) => {
 >   const { theme } = useContext(ThemeContext)!; // must be before if
 >   if (!show) return null;
 >   return <div className={`tooltip-${theme}`}>...</div>;
 > }
 >
 > // ✅ use() — can call anywhere
-> function Tooltip({ show }: { show: boolean }) {
+> const Tooltip = ({ show }: { show: boolean }) => {
 >   if (!show) return null;
 >   const { theme } = use(ThemeContext)!; // after early return!
 >   return <div className={`tooltip-${theme}`}>...</div>;
@@ -277,7 +277,7 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
 #### Using the Reducer
 
 ```tsx
-function App() {
+const App = () => {
   const [state, dispatch] = useReducer(taskReducer, {
     tasks: loadTasks(),
     filter: 'all',
@@ -335,7 +335,7 @@ interface TaskContextType {
 
 const TaskContext = createContext<TaskContextType | null>(null);
 
-function TaskProvider({ children }: { children: React.ReactNode }) {
+const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(taskReducer, {
     tasks: loadTasks(),
     filter: 'all',
@@ -361,7 +361,7 @@ Now any component can read tasks and dispatch actions — no prop drilling:
 
 ```tsx
 // TaskCard — deep in the tree, no props needed for actions
-function TaskCard({ task }: { task: Task }) {
+const TaskCard = ({ task }: { task: Task }) => {
   const { dispatch } = useTaskContext();
 
   return (
@@ -460,7 +460,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-function AuthProvider({ children }: { children: React.ReactNode }) {
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = (user: User) => setUser(user);
@@ -480,7 +480,7 @@ function useAuth(): AuthContextType {
 }
 
 // Usage
-function NavBar() {
+const NavBar = () => {
   const { user, logout, isAuthenticated } = useAuth();
 
   return (
@@ -541,7 +541,7 @@ const notify = (message: string, type: Notification['type'] = 'info') => {
 ```tsx
 import { use } from 'react';
 
-function ConditionalWidget({ enabled }: { enabled: boolean }) {
+const ConditionalWidget = ({ enabled }: { enabled: boolean }) => {
   if (!enabled) {
     return <p>Widget disabled</p>;
   }
@@ -577,7 +577,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem('taskflow-theme');
     return (stored === 'dark' || stored === 'light') ? stored : 'light';
@@ -702,7 +702,7 @@ interface TaskContextType {
 
 const TaskContext = createContext<TaskContextType | null>(null);
 
-export function TaskProvider({ children }: { children: React.ReactNode }) {
+export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(taskReducer, {
     tasks: [],
     filter: 'all' as Filter,
@@ -811,7 +811,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-function Layout({ children }: LayoutProps) {
+const Layout = ({ children }: LayoutProps) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -838,7 +838,7 @@ Update `src/features/tasks/TaskForm.tsx`:
 import { useState } from 'react';
 import { useTaskContext } from '../../context/TaskContext';
 
-function TaskForm() {
+const TaskForm = () => {
   const [title, setTitle] = useState('');
   const { dispatch } = useTaskContext();
 
@@ -879,7 +879,7 @@ import TaskForm from './features/tasks/TaskForm';
 import TaskFilters from './features/tasks/TaskFilters';
 import TaskList from './features/tasks/TaskList';
 
-function TaskFlowContent() {
+const TaskFlowContent = () => {
   const { activeCount } = useTaskContext();
 
   return (
@@ -894,7 +894,7 @@ function TaskFlowContent() {
   );
 }
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <TaskProvider>
@@ -941,6 +941,6 @@ Look how clean `App` is now! No props being passed at all. Each component reads 
 
 ---
 
-**Next up: [Chapter 6 — Custom Hooks →](../06-custom-hooks/CHAPTER.md)**
+**Next up: [Chapter 6 — Custom Hooks →](/chapters/06-custom-hooks)**
 
 Our context files are getting beefy. The localStorage logic is duplicated. Event handlers are spread across components. Time to extract reusable logic into custom hooks — React's ultimate abstraction.

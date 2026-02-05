@@ -11,7 +11,6 @@ title: "Chapter 12: shadcn/ui — Complex Components"
 > **📌 Where we are:** TaskFlow uses shadcn Button, Input, Card, Badge (Ch 11). Task creation still uses a plain form on the page. Actions (edit, delete) are individual buttons. There's no mobile menu. This chapter adds the UI patterns that make apps feel polished.
 
 ---
-id: 12-shadcn-complex-components
 
 ## 🧠 Concepts
 
@@ -108,7 +107,6 @@ Every shadcn component inherits Radix's accessibility features:
 You get WCAG compliance for free. No manual `aria-*` attributes, no `onKeyDown` handlers, no focus management code.
 
 ---
-id: 12-shadcn-complex-components
 
 ## 💡 Examples
 
@@ -534,7 +532,6 @@ import {
 ```
 
 ---
-id: 12-shadcn-complex-components
 
 ## 🔨 Project Task: Make TaskFlow Interactive
 
@@ -993,7 +990,6 @@ const Layout = () => {
 - [ ] **Dark mode:** All overlay components respect the current theme
 
 ---
-id: 12-shadcn-complex-components
 
 ## 🧪 Challenge
 
@@ -1026,7 +1022,6 @@ id: 12-shadcn-complex-components
    ```
 
 ---
-id: 12-shadcn-complex-components
 
 ## 📚 Further Reading
 
@@ -1038,7 +1033,6 @@ id: 12-shadcn-complex-components
 - [Vercel: Preloading on intent](https://vercel.com/blog) — preload dialog content on hover for instant open
 
 ---
-id: 12-shadcn-complex-components
 
 **Next up: [Chapter 13 — Data Display →](/chapters/13-data-display)**
 

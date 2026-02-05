@@ -351,7 +351,7 @@ function renderWithProviders(
   ui: React.ReactElement,
   { theme = "light", ...options } = {}
 ) {
-  function Wrapper({ children }: { children: React.ReactNode }) {
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
     return (
       <ThemeContext value={theme}>
         <TaskProvider>{children}</TaskProvider>

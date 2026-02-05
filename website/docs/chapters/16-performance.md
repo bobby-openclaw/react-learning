@@ -11,7 +11,6 @@ title: "Chapter 16: Performance"
 > **📌 Prerequisite:** Chapters 0 (mental models — especially Virtual DOM & reconciliation), 4 (effects), 5 (context), and all the TaskFlow work from Chapters 11-15.
 
 ---
-id: 16-performance
 
 ## 🧠 Concepts
 
@@ -488,7 +487,6 @@ const VirtualTaskList = ({ tasks }: { tasks: Task[] }) => {
 This tells the browser to skip layout/paint for off-screen elements. It's a CSS-only optimization — no React changes needed. Browser support is good (Chrome, Edge, Firefox).
 
 ---
-id: 16-performance
 
 ## 💡 Examples
 
@@ -664,7 +662,6 @@ const onRender: ProfilerOnRenderCallback = (id, phase, actualDuration) => {
 The `<Profiler>` component gives you programmatic access to render timing. Use it for automated performance monitoring.
 
 ---
-id: 16-performance
 
 ## 🔨 Project Task: Optimize TaskFlow
 
@@ -745,7 +742,6 @@ npm run build
 ```
 
 ---
-id: 16-performance
 
 ## 🧪 Challenge
 
@@ -781,7 +777,6 @@ If you have many tasks, implement virtualization with `@tanstack/react-virtual`:
 3. Compare scroll performance with 1000 tasks: virtualized vs. non-virtualized
 
 ---
-id: 16-performance
 
 ## 📚 Further Reading
 
@@ -795,7 +790,6 @@ id: 16-performance
 - [web.dev: content-visibility](https://web.dev/articles/content-visibility) — CSS-based rendering optimization
 
 ---
-id: 16-performance
 
 **Next up: [Chapter 17 — Testing →](/chapters/17-testing)**
 

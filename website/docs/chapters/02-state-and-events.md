@@ -11,7 +11,6 @@ title: "Chapter 2: State & Events"
 > **📌 Prerequisites:** You've completed Chapter 1 — TaskFlow renders a hardcoded list of `<TaskCard />` components with proper keys.
 
 ---
-id: 02-state-and-events
 
 ## 🧠 Concepts
 
@@ -116,7 +115,6 @@ const [tasks, setTasks] = useState(() =>
 > **💡 Vercel Best Practice:** Always use lazy initialization (`useState(() => ...)`) when the initial value involves computation — parsing JSON, reading localStorage, calculating from props. It's a free performance win.
 
 ---
-id: 02-state-and-events
 
 ### 2. State Immutability: The Cardinal Rule
 
@@ -168,7 +166,6 @@ setCount((prev) => prev + 1);
 Why? React batches state updates for performance. If you call `setCount(count + 1)` three times in one event handler, `count` is the same stale value each time, so you get `+1` instead of `+3`. The functional form fixes this.
 
 ---
-id: 02-state-and-events
 
 ### 3. Event Handling
 
@@ -234,7 +231,6 @@ When you need to pass data (like a task ID) to a handler:
 ```
 
 ---
-id: 02-state-and-events
 
 ### 4. Controlled Components
 
@@ -284,7 +280,6 @@ This feels circular, but it gives you full control: you can validate, transform,
 **Every form input in TaskFlow will be controlled.** It's the React way.
 
 ---
-id: 02-state-and-events
 
 ### 5. Conditional Rendering Patterns
 
@@ -331,7 +326,6 @@ const TaskList = ({ tasks }: { tasks: Task[] }) => {
 > **💡 Vercel Best Practice:** The `&&` pattern is a minefield. `0 && <Component />` renders `0`. `"" && <Component />` renders an empty string. These are valid JSX values that show up in the DOM. Always use ternary with an explicit `null` for the falsy case, or coerce to boolean: `{!!count && <Component />}`.
 
 ---
-id: 02-state-and-events
 
 ### 6. Deriving State (Don't Store What You Can Compute)
 
@@ -358,7 +352,6 @@ Derived values are computed fresh every render — for free. No state to sync, n
 > **💡 Vercel Best Practice:** If you can calculate a value from existing state or props during render, don't store it in state. This eliminates an entire class of bugs where your "cached" state falls out of sync with the source of truth.
 
 ---
-id: 02-state-and-events
 
 ## 💡 Examples
 
@@ -466,7 +459,6 @@ const TagManager = () => {
 ```
 
 ---
-id: 02-state-and-events
 
 ## 🔨 Project Task: Interactive TaskFlow
 
@@ -786,7 +778,6 @@ Run `npm run dev` and test:
 - ✅ Counter updates as you complete/delete tasks
 
 ---
-id: 02-state-and-events
 
 ## 🧪 Challenge
 
@@ -799,7 +790,6 @@ id: 02-state-and-events
 4. **Keyboard shortcuts** — press `/` to focus the add-task input. You'll need `useRef` (preview of Chapter 10) and a `keydown` event listener.
 
 ---
-id: 02-state-and-events
 
 ## 📚 Further Reading
 
@@ -810,7 +800,6 @@ id: 02-state-and-events
 - [React docs: Conditional Rendering](https://react.dev/learn/conditional-rendering) — all the patterns
 
 ---
-id: 02-state-and-events
 
 **Next up: [Chapter 3 — Component Composition →](/chapters/03-component-composition)**
 

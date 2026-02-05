@@ -11,7 +11,6 @@ title: "Chapter 3: Component Composition"
 > **📌 Prerequisites:** You've completed Chapter 2 — TaskFlow has state, event handlers, add/delete/toggle/filter functionality all working inside a growing `App.tsx`.
 
 ---
-id: 03-component-composition
 
 ## 🧠 Concepts
 
@@ -48,7 +47,6 @@ Don't create a component for every `<div>`. Premature abstraction is real:
 **The gut check:** "If someone new joined the team, would this file be easy to understand?" If a component is getting hard to read, split it. If it's still clear, leave it.
 
 ---
-id: 03-component-composition
 
 ### 2. Props Drilling
 
@@ -113,7 +111,6 @@ Solutions we'll learn later:
 - **External state** (Chapter 14) — Zustand, Redux, etc.
 
 ---
-id: 03-component-composition
 
 ### 3. The `children` Prop and Composition
 
@@ -246,7 +243,6 @@ const MouseTracker = ({ children }: MouseTrackerProps) => {
 Today you'd usually use a custom hook for this (Chapter 6), but the pattern is worth recognizing.
 
 ---
-id: 03-component-composition
 
 ### 4. Component Organization
 
@@ -313,7 +309,6 @@ export default Button;
 This `Button` knows nothing about tasks. It's pure UI infrastructure.
 
 ---
-id: 03-component-composition
 
 ### 5. TypeScript Tip: Extracting Common Types
 
@@ -348,7 +343,6 @@ interface TaskCardProps extends TaskActions {
 ```
 
 ---
-id: 03-component-composition
 
 ## 💡 Examples
 
@@ -454,7 +448,6 @@ const GlassCard = ({ children, className = '' }: GlassCardProps) => {
 ```
 
 ---
-id: 03-component-composition
 
 ## 🔨 Project Task: Decompose TaskFlow
 
@@ -664,7 +657,6 @@ Everything should still work exactly as before:
 But now the code is organized, and each component has a clear purpose.
 
 ---
-id: 03-component-composition
 
 ## 🧪 Challenge
 
@@ -677,7 +669,6 @@ id: 03-component-composition
 4. **Spot the drill** — In the current architecture, how many levels deep do `onToggle` and `onDelete` travel? (Answer: just 2 — App → TaskList → TaskCard.) When would you switch to Context? (Think about this; we'll solve it in Chapter 5.)
 
 ---
-id: 03-component-composition
 
 ## 📚 Further Reading
 
@@ -688,7 +679,6 @@ id: 03-component-composition
 - [Patterns.dev: Compound Pattern](https://www.patterns.dev/react/compound-pattern/) — compound components deep dive
 
 ---
-id: 03-component-composition
 
 **Next up: [Chapter 4 — Side Effects & Lifecycle →](/chapters/04-side-effects-lifecycle)**
 

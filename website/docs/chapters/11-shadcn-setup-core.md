@@ -11,7 +11,6 @@ title: "Chapter 11: shadcn/ui — Setup & Core Components"
 > **📌 Where we are:** TaskFlow has Tailwind styling with dark mode (Ch 9-10). The UI is custom-built and looks decent, but we're maintaining our own button variants, input states, and card styles. Time to replace that handcrafted code with battle-tested shadcn components.
 
 ---
-id: 11-shadcn-setup-core
 
 ## 🧠 Concepts
 
@@ -191,7 +190,6 @@ Key patterns:
 > 🆕 **React 19:** Notice there's no `forwardRef` wrapper! In React 19, `ref` is just a prop, so shadcn components can accept refs naturally without the `forwardRef` dance.
 
 ---
-id: 11-shadcn-setup-core
 
 ## 💡 Examples
 
@@ -364,7 +362,6 @@ Now use it:
 **This is the power of owning your components.** You didn't fork a library, you didn't fight with theme overrides — you just edited the code.
 
 ---
-id: 11-shadcn-setup-core
 
 ## 🔨 Project Task: Upgrade TaskFlow with shadcn/ui
 
@@ -588,7 +585,6 @@ const Dashboard = () => {
 - [ ] No visual regressions from the component swap
 
 ---
-id: 11-shadcn-setup-core
 
 ## 🧪 Challenge
 
@@ -609,7 +605,6 @@ id: 11-shadcn-setup-core
    ```
 
 ---
-id: 11-shadcn-setup-core
 
 ## 📚 Further Reading
 
@@ -620,7 +615,6 @@ id: 11-shadcn-setup-core
 - [shadcn/ui with Vite](https://ui.shadcn.com/docs/installation/vite) — official Vite installation guide
 
 ---
-id: 11-shadcn-setup-core
 
 **Next up: [Chapter 12 — shadcn Complex Components →](/chapters/12-shadcn-complex-components)**
 

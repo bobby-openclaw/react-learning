@@ -11,7 +11,6 @@ title: "Chapter 14: Forms the shadcn Way"
 > **📌 Where we are:** TaskFlow has a DataTable (Ch 13), shadcn UI throughout (Ch 11-12), and React Hook Form with Zod validation (Ch 8). The form *works*, but it's not using shadcn's form components yet. This chapter fixes that and adds richer fields (date pickers, comboboxes, selects).
 
 ---
-id: 14-shadcn-forms
 
 ## 🧠 Concepts
 
@@ -438,7 +437,6 @@ const TaskForm = () => {
 > 🆕 **React 19 Note:** `useActionState` replaces the old pattern of managing `isPending`, `error`, and `success` state manually with three separate `useState` calls. One hook, three pieces of state.
 
 ---
-id: 14-shadcn-forms
 
 ## 💡 Examples
 
@@ -763,7 +761,6 @@ const TaskForm = () => {
 ```
 
 ---
-id: 14-shadcn-forms
 
 ## 🔨 Project Task: Rebuild TaskFlow's Forms
 
@@ -850,7 +847,6 @@ Walk through these scenarios:
 5. Edit a task → dialog opens with pre-filled values, save updates the table
 
 ---
-id: 14-shadcn-forms
 
 ## 🧪 Challenge
 
@@ -897,7 +893,6 @@ const remaining = 100 - (title?.length ?? 0);
 ```
 
 ---
-id: 14-shadcn-forms
 
 ## 📚 Further Reading
 
@@ -910,7 +905,6 @@ id: 14-shadcn-forms
 - [Form Design Best Practices](https://www.nngroup.com/articles/web-form-design/) — UX considerations
 
 ---
-id: 14-shadcn-forms
 
 **Next up: [Chapter 15 — Theming & Polish →](/chapters/15-theming-polish)**
 

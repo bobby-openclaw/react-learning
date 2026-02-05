@@ -11,7 +11,6 @@ title: "Chapter 4: Side Effects & Lifecycle"
 > **📌 Prerequisites:** You've completed Chapter 3 — TaskFlow has a clean component architecture with `Layout`, `TaskList`, `TaskForm`, `TaskFilters`, and `TaskCard`.
 
 ---
-id: 04-side-effects-lifecycle
 
 ## 🧠 Concepts
 
@@ -44,7 +43,6 @@ These can't happen inside the "render" (the return statement) because:
 React gives you two places for side effects: **event handlers** and **useEffect**.
 
 ---
-id: 04-side-effects-lifecycle
 
 ### 2. Event Handlers vs. useEffect
 
@@ -82,7 +80,6 @@ The difference:
 - **useEffect:** "Whenever X changes, synchronize Y"
 
 ---
-id: 04-side-effects-lifecycle
 
 ### 3. useEffect In Depth
 
@@ -199,7 +196,6 @@ Render 4: deps = [1]    → skip (1 === 1)
 > ```
 
 ---
-id: 04-side-effects-lifecycle
 
 ### 4. Cleanup Functions
 
@@ -268,7 +264,6 @@ If your effect breaks after this, your cleanup is incomplete.
 This only happens in development. Production runs effects once.
 
 ---
-id: 04-side-effects-lifecycle
 
 ### ⚠️ Common useEffect Mistakes
 
@@ -346,7 +341,6 @@ useEffect(() => {
 The React docs article [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect) is essential reading. Bookmark it.
 
 ---
-id: 04-side-effects-lifecycle
 
 ### 5. Data Fetching: The Old Way (useEffect + useState)
 
@@ -400,7 +394,6 @@ This works, but look at all that boilerplate! Three state variables, a cancelled
 **This is why libraries like TanStack Query exist** (Chapter 13). For now, understand this pattern — you'll see it in legacy code. But React 19 offers a better primitive.
 
 ---
-id: 04-side-effects-lifecycle
 
 ### 6. React 19: The `use()` API
 
@@ -480,7 +473,6 @@ id: 04-side-effects-lifecycle
 > The loading state is gone from the component — `Suspense` handles it. The error state is gone too — `ErrorBoundary` handles it. The component just reads data and renders.
 
 ---
-id: 04-side-effects-lifecycle
 
 ### 7. When NOT to useEffect
 
@@ -534,7 +526,6 @@ useEffect(() => {
 When the `key` changes, React unmounts and remounts the component with fresh state. Clean and declarative.
 
 ---
-id: 04-side-effects-lifecycle
 
 ## 💡 Examples
 
@@ -653,7 +644,6 @@ const App = () => {
 ```
 
 ---
-id: 04-side-effects-lifecycle
 
 ## 🔨 Project Task: Persist Tasks & Mock API
 
@@ -913,7 +903,6 @@ This merges API tasks with existing ones, avoiding duplicates.
 4. Document title updates with active task count ✅
 
 ---
-id: 04-side-effects-lifecycle
 
 ## 🧪 Challenge
 
@@ -926,7 +915,6 @@ id: 04-side-effects-lifecycle
 4. **Refetch on focus** — When the user switches back to the TaskFlow tab, re-sync from localStorage (in case they edited in another tab). Use the `visibilitychange` event.
 
 ---
-id: 04-side-effects-lifecycle
 
 ## 📚 Further Reading
 
@@ -937,7 +925,6 @@ id: 04-side-effects-lifecycle
 - [TanStack Query docs](https://tanstack.com/query/latest) — the library that solves data fetching properly
 
 ---
-id: 04-side-effects-lifecycle
 
 **Next up: [Chapter 5 — Context & Global State →](/chapters/05-context-global-state)**
 

@@ -11,7 +11,6 @@ title: "Chapter 10: Advanced Tailwind CSS"
 > **📌 Where we are:** TaskFlow has Tailwind basics (Ch 9) — layout, spacing, typography, responsive breakpoints. The theme toggle from Ch 5 exists but doesn't work with Tailwind's dark mode yet. Let's connect them and add polish.
 
 ---
-id: 10-advanced-tailwind
 
 ## 🧠 Concepts
 
@@ -243,7 +242,6 @@ Container queries use `@` prefixed breakpoints. The component adapts based on ho
 This is a CSS property (not Tailwind-specific) that tells the browser to skip layout/paint for off-screen elements. Massive performance win for long task lists. The `contain-intrinsic-size` tells the browser the estimated height so scrollbar calculations stay accurate.
 
 ---
-id: 10-advanced-tailwind
 
 ## 💡 Examples
 
@@ -383,7 +381,6 @@ const TaskListSkeleton = ({ count = 5 }: { count?: number }) => {
 ```
 
 ---
-id: 10-advanced-tailwind
 
 ## 🔨 Project Task: Polish TaskFlow
 
@@ -624,7 +621,6 @@ If you have many tasks, wrap the list in a performance-optimized container:
 - [ ] Mobile layout still works correctly
 
 ---
-id: 10-advanced-tailwind
 
 ## 🧪 Challenge
 
@@ -644,7 +640,6 @@ id: 10-advanced-tailwind
 4. **Animated empty state:** When there are no tasks, show an animated illustration (use SVG or emoji with `animate-bounce`).
 
 ---
-id: 10-advanced-tailwind
 
 ## 📚 Further Reading
 
@@ -655,7 +650,6 @@ id: 10-advanced-tailwind
 - [Vercel: Optimizing CSS](https://vercel.com/blog) — best practices for CSS performance
 
 ---
-id: 10-advanced-tailwind
 
 **Next up: [Chapter 11 — shadcn/ui Setup & Core Components →](/chapters/11-shadcn-setup-core)**
 

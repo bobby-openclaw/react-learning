@@ -108,7 +108,7 @@ const TaskCard = React.memo(function TaskCard({ task }: { task: Task }) {
 **The gotcha — unstable references:**
 
 ```tsx
-function TaskList() {
+const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   // ❌ This creates a NEW function on every render
@@ -130,7 +130,7 @@ This is where `useCallback` enters.
 `useCallback` returns a memoized version of a callback that only changes when its dependencies change:
 
 ```tsx
-function TaskList() {
+const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   // ✅ Same function reference between renders (unless tasks changes)
@@ -161,7 +161,7 @@ function TaskList() {
 `useMemo` caches the result of an expensive computation:
 
 ```tsx
-function TaskAnalytics({ tasks }: { tasks: Task[] }) {
+const TaskAnalytics = ({ tasks }: { tasks: Task[] }) => {
   // ❌ Recalculates on EVERY render, even if tasks didn't change
   const stats = calculateComplexStats(tasks);
 
@@ -243,7 +243,7 @@ useEffect(() => {
 #### Extract memoized components
 ```tsx
 // ❌ ExpensiveChart re-renders when count changes (even though it doesn't use count)
-function Dashboard() {
+const Dashboard = () => {
   const [count, setCount] = useState(0);
   return (
     <div>
@@ -256,7 +256,7 @@ function Dashboard() {
 // ✅ Extract the expensive part — now it only re-renders when chartData changes
 const MemoizedChart = React.memo(ExpensiveChart);
 
-function Dashboard() {
+const Dashboard = () => {
   const [count, setCount] = useState(0);
   return (
     <div>
@@ -270,14 +270,14 @@ function Dashboard() {
 #### Hoist static JSX
 ```tsx
 // ❌ This object is recreated every render
-function Layout() {
+const Layout = () => {
   const style = { padding: 20, background: '#f0f0f0' };
   return <div style={style}>{children}</div>;
 }
 
 // ✅ Hoisted outside — same reference always
 const layoutStyle = { padding: 20, background: '#f0f0f0' };
-function Layout() {
+const Layout = () => {
   return <div style={layoutStyle}>{children}</div>;
 }
 ```
@@ -292,7 +292,7 @@ React Compiler (previously called "React Forget") is an experimental compiler th
 
 ```tsx
 // What you write:
-function TaskList({ tasks }: { tasks: Task[] }) {
+const TaskList = ({ tasks }: { tasks: Task[] }) => {
   const sorted = tasks.sort((a, b) => a.priority - b.priority);
   const handleDelete = (id: string) => {
     // ...
@@ -301,7 +301,7 @@ function TaskList({ tasks }: { tasks: Task[] }) {
 }
 
 // What React Compiler produces (conceptually):
-function TaskList({ tasks }: { tasks: Task[] }) {
+const TaskList = ({ tasks }: { tasks: Task[] }) => {
   const sorted = useMemo(() => tasks.sort((a, b) => a.priority - b.priority), [tasks]);
   const handleDelete = useCallback((id: string) => {
     // ...
@@ -352,7 +352,7 @@ import { lazy, Suspense } from "react";
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<TasksPage />} />
@@ -398,7 +398,7 @@ function App() {
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 
 // Preload when user hovers over the settings link
-function SettingsLink() {
+const SettingsLink = () => {
   const preload = () => import("./pages/SettingsPage");
   return (
     <Link
@@ -431,7 +431,7 @@ For TaskFlow, if you have hundreds or thousands of tasks, rendering them all int
 ```tsx
 import { useVirtualizer } from "@tanstack/react-virtual";
 
-function VirtualTaskList({ tasks }: { tasks: Task[] }) {
+const VirtualTaskList = ({ tasks }: { tasks: Task[] }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualizer({
@@ -488,7 +488,7 @@ This tells the browser to skip layout/paint for off-screen elements. It's a CSS-
 
 ```tsx
 // BEFORE: Every task re-renders when any task changes
-function TaskList() {
+const TaskList = () => {
   const { tasks, toggleTask } = useTaskContext();
 
   return (
@@ -533,7 +533,7 @@ const TaskItem = React.memo(function TaskItem({
   );
 });
 
-function TaskList() {
+const TaskList = () => {
   const { tasks, toggleTask } = useTaskContext();
 
   // Stable callback reference — doesn't change between renders
@@ -554,7 +554,7 @@ function TaskList() {
 ### Example 2: Expensive Derived Data
 
 ```tsx
-function TaskAnalytics({ tasks }: { tasks: Task[] }) {
+const TaskAnalytics = ({ tasks }: { tasks: Task[] }) => {
   // This calculation is expensive for large datasets
   const analytics = useMemo(() => {
     const byPriority = tasks.reduce((acc, task) => {
@@ -593,7 +593,7 @@ function TaskAnalytics({ tasks }: { tasks: Task[] }) {
 
 ```tsx
 // pages/SettingsPage.tsx — this becomes its own chunk
-export default function SettingsPage() {
+const SettingsPage = () => {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Settings</h1>
@@ -634,7 +634,7 @@ const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 
 ```tsx
 // Quick and dirty — console.time
-function ExpensiveComponent({ data }: { data: Item[] }) {
+const ExpensiveComponent = ({ data }: { data: Item[] }) => {
   console.time("expensive-render");
   const result = heavyComputation(data);
   console.timeEnd("expensive-render");
@@ -708,7 +708,7 @@ const TaskDispatchContext = createContext<TaskDispatch>(null!);
 
 // Components that only call actions (don't read tasks) won't re-render
 // when tasks change!
-function AddTaskButton() {
+const AddTaskButton = () => {
   const dispatch = useContext(TaskDispatchContext); // doesn't re-render on task changes
   return <Button onClick={() => dispatch({ type: "ADD" })}>Add Task</Button>;
 }
@@ -749,7 +749,7 @@ Build a performance monitoring component that shows:
 Display it as a floating dev-tools panel (only in development):
 
 ```tsx
-function DevPerformancePanel() {
+const DevPerformancePanel = () => {
   if (process.env.NODE_ENV !== "development") return null;
 
   return (
@@ -785,6 +785,6 @@ If you have many tasks, implement virtualization with `@tanstack/react-virtual`:
 
 ---
 
-**Next up: [Chapter 17 — Testing →](../17-testing/CHAPTER.md)**
+**Next up: [Chapter 17 — Testing →](/chapters/17-testing)**
 
 You've built it, styled it, optimized it. Now let's make sure it *stays working* — with Vitest, React Testing Library, and testing patterns that catch real bugs.

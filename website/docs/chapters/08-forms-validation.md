@@ -13,7 +13,6 @@ title: "Chapter 8: Forms & Validation"
 > **📌 React 19 features introduced:** `useActionState`, `useFormStatus`, `useOptimistic`, and native `<form action>`. These are game-changers.
 
 ---
-id: 08-forms-validation
 
 ## 🧠 Concepts
 
@@ -213,7 +212,6 @@ const [optimisticTasks, addOptimisticTask] = useOptimistic(
 During the async action, call `addOptimisticTask(newTask)` — the UI immediately shows the new task. When the action completes (or fails), `optimisticTasks` snaps back to the real `tasks` value.
 
 ---
-id: 08-forms-validation
 
 ## 💡 Examples
 
@@ -414,7 +412,6 @@ const TaskList = ({ tasks, toggleTask }: {
 ```
 
 ---
-id: 08-forms-validation
 
 ## 🔨 Project Task: Upgrade TaskFlow Forms
 
@@ -712,7 +709,6 @@ Test your forms thoroughly:
 - [ ] Quick-add with empty input → inline error message
 
 ---
-id: 08-forms-validation
 
 ## 🧪 Challenge
 
@@ -732,7 +728,6 @@ id: 08-forms-validation
 3. **Multi-step form:** Split task creation into two steps: (1) title + priority, (2) description + due date. Use RHF's `trigger()` to validate step 1 before proceeding.
 
 ---
-id: 08-forms-validation
 
 ## 📚 Further Reading
 
@@ -745,7 +740,6 @@ id: 08-forms-validation
 - [Vercel: Forms best practices](https://vercel.com/blog) — progressive enhancement patterns
 
 ---
-id: 08-forms-validation
 
 **Next up: [Chapter 9 — Tailwind CSS Fundamentals →](/chapters/09-tailwind-fundamentals)**
 

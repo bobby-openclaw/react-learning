@@ -11,7 +11,6 @@ title: "Chapter 13: Data Display — Tables, Tabs, Toasts & Skeletons"
 > **📌 Prerequisite:** You should have shadcn/ui installed and working (Chapters 11-12), along with React Router and context-based state management from earlier chapters.
 
 ---
-id: 13-data-display
 
 ## 🧠 Concepts
 
@@ -154,7 +153,6 @@ shadcn's `<Skeleton>` is a pulsing gray block you size to match your content:
 The key insight: skeletons work best when they **match the layout** of the real content. Users perceive the page loading faster because the layout doesn't shift when real data appears.
 
 ---
-id: 13-data-display
 
 ## 💡 Examples
 
@@ -526,7 +524,6 @@ const TaskPage = () => {
 ```
 
 ---
-id: 13-data-display
 
 ## 🔨 Project Task: Build the TaskFlow Data Table
 
@@ -840,7 +837,6 @@ const TasksPage = () => {
 Where `<TaskDashboard>` contains the tabs and data table.
 
 ---
-id: 13-data-display
 
 ## 🧪 Challenge
 
@@ -886,7 +882,6 @@ import {
 ```
 
 ---
-id: 13-data-display
 
 ## 📚 Further Reading
 
@@ -898,7 +893,6 @@ id: 13-data-display
 - [Designing Effective Data Tables](https://medium.com/nextux/design-better-data-tables-4ecc99d23356) — UX best practices
 
 ---
-id: 13-data-display
 
 **Next up: [Chapter 14 — Forms the shadcn Way →](/chapters/14-shadcn-forms)**
 

@@ -11,7 +11,6 @@ title: "Chapter 6: Custom Hooks"
 > **📌 Where we are:** TaskFlow has components (Ch 3), state management (Ch 2), effects with localStorage persistence (Ch 4), and Context for theme + global task state (Ch 5). But the logic is scattered — `useState` and `useEffect` calls are copy-pasted across components. Time to clean house.
 
 ---
-id: 06-custom-hooks
 
 ## 🧠 Concepts
 
@@ -58,7 +57,6 @@ const ComponentB = () => {
 Both components track window width, but they each have their own `useState` internally. If you need shared state, that's what Context is for (Chapter 5).
 
 ---
-id: 06-custom-hooks
 
 ### 2. Rules of Hooks
 
@@ -142,7 +140,6 @@ function useLocalStorage(key) {
 > 🆕 **React 19 + React Compiler:** The upcoming React Compiler (experimental in React 19) relies even more heavily on these rules. The compiler analyzes your hooks to auto-optimize, so violating the rules won't just cause bugs — it'll prevent optimizations.
 
 ---
-id: 06-custom-hooks
 
 ### 3. Patterns for Custom Hooks
 
@@ -333,7 +330,6 @@ const TaskSearch = () => {
 ```
 
 ---
-id: 06-custom-hooks
 
 ### 4. When to Extract a Custom Hook
 
@@ -352,7 +348,6 @@ Not every `useState` needs to be a hook. Extract when:
 - The abstraction doesn't have a good name (if you can't name it, it's not a real concept)
 
 ---
-id: 06-custom-hooks
 
 ### 5. Return Value Patterns
 
@@ -375,7 +370,6 @@ const { tasks, addTask, deleteTask } = useTasks();
 **Rule of thumb:** Tuple for 2 values (like useState), object for 3+.
 
 ---
-id: 06-custom-hooks
 
 ### 6. Custom Hooks vs. Utility Functions
 
@@ -405,7 +399,6 @@ function useCurrentTime(intervalMs: number = 1000) {
 If your function doesn't call any hooks, it's just a utility function. Don't put `use` in front of it.
 
 ---
-id: 06-custom-hooks
 
 ## 💡 Examples
 
@@ -500,7 +493,6 @@ const TaskItem = ({ task }: { task: Task }) => {
 ```
 
 ---
-id: 06-custom-hooks
 
 ## 🔨 Project Task: Refactor TaskFlow with Custom Hooks
 
@@ -742,7 +734,6 @@ You're done when:
 - [ ] You could reuse `useLocalStorage` in any other project
 
 ---
-id: 06-custom-hooks
 
 ## 🧪 Challenge: Build `useAsyncAction`
 
@@ -774,7 +765,6 @@ const TaskList = () => {
 - Consider: what happens if the component unmounts during the async call?
 
 ---
-id: 06-custom-hooks
 
 ## 📚 Further Reading
 
@@ -784,7 +774,6 @@ id: 06-custom-hooks
 - [React docs: You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect) — helps you decide what should be a hook vs a plain function
 
 ---
-id: 06-custom-hooks
 
 **Next up: [Chapter 7 — React Router →](/chapters/07-react-router)**
 

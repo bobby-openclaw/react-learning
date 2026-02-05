@@ -96,7 +96,7 @@ const taskSchema = z.object({
 // Infer the TypeScript type from the schema — single source of truth!
 type TaskFormValues = z.infer<typeof taskSchema>;
 
-function TaskForm() {
+const TaskForm = () => {
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
@@ -382,7 +382,7 @@ React 19 introduced `useActionState` for server-side form handling. But what if 
 import { useActionState } from "react";
 import { useForm } from "react-hook-form";
 
-function TaskForm() {
+const TaskForm = () => {
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: { title: "", priority: "medium" },
@@ -485,7 +485,7 @@ interface TaskFormProps {
   isEditing?: boolean;
 }
 
-export function TaskForm({ defaultValues, onSubmit, isEditing = false }: TaskFormProps) {
+export const TaskForm = ({ defaultValues, onSubmit, isEditing = false }: TaskFormProps) => {
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
@@ -671,7 +671,7 @@ export function TaskForm({ defaultValues, onSubmit, isEditing = false }: TaskFor
 ### Example 2: Edit Form with Pre-filled Values
 
 ```tsx
-function EditTaskDialog({ task, open, onOpenChange }: EditTaskDialogProps) {
+const EditTaskDialog = ({ task, open, onOpenChange }: EditTaskDialogProps) => {
   const { updateTask } = useTaskContext();
 
   return (
@@ -731,7 +731,7 @@ const taskSchema = z.object({
 React Hook Form's `watch` lets you react to field changes without re-rendering the whole form:
 
 ```tsx
-function TaskForm() {
+const TaskForm = () => {
   const form = useForm<TaskFormValues>({ /* ... */ });
 
   // Watch the priority field
@@ -900,6 +900,6 @@ const remaining = 100 - (title?.length ?? 0);
 
 ---
 
-**Next up: [Chapter 15 — Theming & Polish →](../15-theming-polish/CHAPTER.md)**
+**Next up: [Chapter 15 — Theming & Polish →](/chapters/15-theming-polish)**
 
 We'll make TaskFlow beautiful with a multi-theme system, polished sidebar navigation, and responsive design — all powered by shadcn's CSS variable architecture.

@@ -368,7 +368,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
   }`;
 
-export default function Layout() {
+const Layout = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
@@ -409,7 +409,7 @@ import { Link } from "react-router-dom";
 import { TaskContext } from "../context/TaskContext";
 import QuickAdd from "../components/QuickAdd";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const { tasks } = useContext(TaskContext);
 
   const counts = {
@@ -594,6 +594,6 @@ The sidebar uses `hidden md:flex` — invisible on mobile, visible from `md` bre
 
 ---
 
-**Next up: [Chapter 10 — Advanced Tailwind →](../10-advanced-tailwind/CHAPTER.md)**
+**Next up: [Chapter 10 — Advanced Tailwind →](/chapters/10-advanced-tailwind)**
 
 Custom themes, dark mode, animations, and advanced patterns to make TaskFlow look polished and professional.

@@ -383,7 +383,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type TaskCategory = "all" | "active" | "completed";
 
-function TaskDashboard() {
+const TaskDashboard = () => {
   const [activeTab, setActiveTab] = useState<TaskCategory>("all");
   const { tasks } = useTaskContext();
 
@@ -432,7 +432,7 @@ function TaskDashboard() {
 // In your layout (once):
 import { Toaster } from "@/components/ui/sonner";
 
-function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
@@ -479,7 +479,7 @@ Notice the `action` property — Sonner lets you add an action button right in t
 ```tsx
 import { Skeleton } from "@/components/ui/skeleton";
 
-function TaskTableSkeleton() {
+const TaskTableSkeleton = () => {
   return (
     <div className="rounded-md border">
       {/* Header skeleton */}
@@ -506,7 +506,7 @@ function TaskTableSkeleton() {
 }
 
 // Usage with Suspense or loading state:
-function TaskPage() {
+const TaskPage = () => {
   const { tasks, isLoading } = useTaskContext();
 
   if (isLoading) {
@@ -811,7 +811,7 @@ Create `src/components/tasks/task-dashboard.tsx` — follow Example 5. Wire up t
 Your task page should now look like:
 
 ```tsx
-function TasksPage() {
+const TasksPage = () => {
   const { tasks, isLoading } = useTaskContext();
 
   return (
@@ -888,6 +888,6 @@ import {
 
 ---
 
-**Next up: [Chapter 14 — Forms the shadcn Way →](../14-shadcn-forms/CHAPTER.md)**
+**Next up: [Chapter 14 — Forms the shadcn Way →](/chapters/14-shadcn-forms)**
 
 We'll rebuild TaskFlow's forms with shadcn's Form component — combining React Hook Form, Zod validation, and beautiful accessible UI components.

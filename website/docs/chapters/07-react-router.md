@@ -13,7 +13,6 @@ title: "Chapter 7: React Router — Navigation & Multi-Page Apps"
 > **📌 We're using React Router v7** — the latest version with a modernized API. If you see v5/v6 patterns online (like `<Switch>` or `element={}` without JSX), ignore them.
 
 ---
-id: 07-react-router
 
 ## 🧠 Concepts
 
@@ -137,7 +136,6 @@ Three ways to navigate:
 **`<Link>`** vs `<a>`**: Always use `<Link>` for internal navigation. Regular `<a>` tags trigger a full page reload, defeating the purpose of an SPA.
 
 ---
-id: 07-react-router
 
 ## 💡 Examples
 
@@ -327,7 +325,6 @@ const TaskCard = ({ task }: { task: Task }) => {
 ```
 
 ---
-id: 07-react-router
 
 ## 🔨 Project Task: Add Pages to TaskFlow
 
@@ -668,7 +665,6 @@ Add to your CSS:
 > Vite's dev server already handles this, but in production you'll need your web server (nginx, Vercel, etc.) configured for SPA fallback.
 
 ---
-id: 07-react-router
 
 ## 🧪 Challenge
 
@@ -679,7 +675,6 @@ id: 07-react-router
 3. **Animated transitions:** Look into `react-router-dom`'s integration with view transitions or `framer-motion` to animate page changes.
 
 ---
-id: 07-react-router
 
 ## 📚 Further Reading
 
@@ -689,7 +684,6 @@ id: 07-react-router
 - [Vite SPA Fallback](https://vitejs.dev/config/server-options.html) — configuring Vite for client-side routing
 
 ---
-id: 07-react-router
 
 **Next up: [Chapter 8 — Forms & Validation →](/chapters/08-forms-validation)**
 

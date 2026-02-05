@@ -163,7 +163,7 @@ interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {}
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+const Button = ({ className, variant, size, ...props }: ButtonProps) => {
   return (
     <button
       className={cn(buttonVariants({ variant, size, className }))}
@@ -495,7 +495,7 @@ interface TaskCardProps {
   className?: string;
 }
 
-export default function TaskCard({ task, className }: TaskCardProps) {
+const TaskCard = ({ task, className }: TaskCardProps) => {
   const status = statusMap[task.status];
 
   return (
@@ -532,7 +532,7 @@ export default function TaskCard({ task, className }: TaskCardProps) {
 import TaskCard from "@/components/TaskCard";
 import { Separator } from "@/components/ui/separator";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const { tasks } = useContext(TaskContext);
 
   return (
@@ -610,6 +610,6 @@ export default function Dashboard() {
 
 ---
 
-**Next up: [Chapter 12 — shadcn Complex Components →](../12-shadcn-complex-components/CHAPTER.md)**
+**Next up: [Chapter 12 — shadcn Complex Components →](/chapters/12-shadcn-complex-components)**
 
 Dialogs, dropdowns, command palettes, and mobile sidebars — the interactive components that make TaskFlow feel like a real product.

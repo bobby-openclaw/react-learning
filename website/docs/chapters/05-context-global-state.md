@@ -11,7 +11,6 @@ title: "Chapter 5: Context & Global State"
 > **📌 Prerequisites:** You've completed Chapter 4 — TaskFlow persists tasks to localStorage, has a mock API fetch, and you understand useEffect and cleanup functions.
 
 ---
-id: 05-context-global-state
 
 ## 🧠 Concepts
 
@@ -34,7 +33,6 @@ App (theme state)
 Every single component needs `theme` as a prop. If you add a new theme property, you edit **every** intermediate component's prop types. This is the problem Context solves.
 
 ---
-id: 05-context-global-state
 
 ### 2. Context: How It Works
 
@@ -74,7 +72,6 @@ Context is React's built-in dependency injection. It has three parts:
 The data "teleports" from provider to consumer, skipping all intermediate components.
 
 ---
-id: 05-context-global-state
 
 ### 3. createContext + useContext (Classic Pattern)
 
@@ -170,7 +167,6 @@ function useTheme(): ThemeContextType {
 **Always create a custom hook for each context.** It encapsulates the null check and provides a clean API.
 
 ---
-id: 05-context-global-state
 
 ### 4. React 19: `use(Context)` — Conditional Context
 
@@ -214,7 +210,6 @@ id: 05-context-global-state
 > - `use(Context)` — when you need context conditionally, or inside loops
 
 ---
-id: 05-context-global-state
 
 ### 5. useReducer: State Machines for Complex Logic
 
@@ -330,7 +325,6 @@ const App = () => {
 | You want testable state logic | `useReducer` |
 
 ---
-id: 05-context-global-state
 
 ### 6. Context + useReducer = Global State
 
@@ -393,7 +387,6 @@ const TaskCard = ({ task }: { task: Task }) => {
 ```
 
 ---
-id: 05-context-global-state
 
 ### 7. When to Use What
 
@@ -420,7 +413,6 @@ Do you need to share state between components?
 - For high-frequency updates (real-time, animations), use Zustand or Jotai instead
 
 ---
-id: 05-context-global-state
 
 ### ⚠️ Common Pitfall: The Context Re-render Trap
 
@@ -451,7 +443,6 @@ const TaskFilterContext = createContext({ filter: 'all', setFilter, filteredTask
 **Rule of thumb:** If two pieces of state change at different rates, they probably belong in different contexts. Theme changes rarely. Filter changes with every click. Tasks change on user action. Don't bundle them.
 
 ---
-id: 05-context-global-state
 
 ## 💡 Examples
 
@@ -573,7 +564,6 @@ const ConditionalWidget = ({ enabled }: { enabled: boolean }) => {
 ```
 
 ---
-id: 05-context-global-state
 
 ## 🔨 Project Task: Theme Toggle & Task Context
 
@@ -934,7 +924,6 @@ Look how clean `App` is now! No props being passed at all. Each component reads 
 - ✅ No props drilling for tasks or theme
 
 ---
-id: 05-context-global-state
 
 ## 🧪 Challenge
 
@@ -947,7 +936,6 @@ id: 05-context-global-state
 4. **use(Context) experiment** — Refactor one component to use `use(ThemeContext)` instead of `useTheme()`. Put it behind an `if` statement to see conditional context reading in action.
 
 ---
-id: 05-context-global-state
 
 ## 📚 Further Reading
 
@@ -958,7 +946,6 @@ id: 05-context-global-state
 - [Kent C. Dodds: How to Use React Context Effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) — patterns and anti-patterns
 
 ---
-id: 05-context-global-state
 
 **Next up: [Chapter 6 — Custom Hooks →](/chapters/06-custom-hooks)**
 

@@ -11,7 +11,6 @@ title: "Chapter 17: Testing"
 > **📌 Where we are:** TaskFlow is complete — routing, forms, shadcn UI, theming, optimized performance (Ch 16). It works great... until someone refactors a hook and breaks task creation. This chapter adds the safety net.
 
 ---
-id: 17-testing
 
 ## 🧠 Concepts
 
@@ -40,7 +39,6 @@ Forget the testing pyramid. In React, Kent C. Dodds' **testing trophy** is the m
 The sweet spot for React: **component + integration tests** using React Testing Library. They give the best confidence-to-effort ratio.
 
 ---
-id: 17-testing
 
 ### 2. The Testing Philosophy
 
@@ -67,7 +65,6 @@ expect(screen.getByText("Count: 2")).toBeInTheDocument();
 **Why?** If you refactor `useState` to `useReducer`, or rename a handler from `handleClick` to `increment`, your implementation tests break even though nothing changed for the user. Behavior tests survive refactors.
 
 ---
-id: 17-testing
 
 ### 3. The Testing Stack
 
@@ -80,7 +77,6 @@ id: 17-testing
 | **@testing-library/jest-dom** | Extra DOM matchers (toBeVisible, toHaveTextContent, etc.) |
 
 ---
-id: 17-testing
 
 ### 4. Setup
 
@@ -130,7 +126,6 @@ Add to `package.json`:
 Now `npm test` runs in watch mode, `npm run test:run` runs once.
 
 ---
-id: 17-testing
 
 ### 5. Querying Elements
 
@@ -184,7 +179,6 @@ screen.getByTestId("task-card-123");
 - `findBy` — element appears after async operation (data fetch, state update)
 
 ---
-id: 17-testing
 
 ### 6. User Events
 
@@ -222,7 +216,6 @@ await user.selectOptions(screen.getByRole("combobox"), "high");
 `fireEvent.click()` dispatches a single click event. `userEvent.click()` fires the full sequence: pointerdown → mousedown → pointerup → mouseup → click. It catches bugs that only appear with the full event chain.
 
 ---
-id: 17-testing
 
 ### 7. Testing Patterns
 
@@ -460,7 +453,6 @@ describe("useLocalStorage", () => {
 ```
 
 ---
-id: 17-testing
 
 ### 8. What NOT to Test
 
@@ -477,7 +469,6 @@ Just as important as knowing what to test:
 **The golden rule:** Would a user notice if this test fails? If no, you probably don't need the test.
 
 ---
-id: 17-testing
 
 ### 9. Mocking
 
@@ -533,7 +524,6 @@ vi.mock("./api", () => ({
 **Prefer integration over mocks.** The more you mock, the less you're testing.
 
 ---
-id: 17-testing
 
 ### 10. Test Organization
 
@@ -559,7 +549,6 @@ src/
 **Co-locate tests with source.** The test file lives right next to the code it tests. No separate `__tests__` directory needed.
 
 ---
-id: 17-testing
 
 ## 🔨 Project Task: Test TaskFlow
 
@@ -648,7 +637,6 @@ describe("TaskFlow: complete user flow", () => {
 - [ ] Tests use accessible queries (`getByRole`, `getByLabelText`) as primary selectors
 
 ---
-id: 17-testing
 
 ## 🧪 Challenge: Add Coverage Reporting
 
@@ -667,7 +655,6 @@ id: 17-testing
 4. Look at the uncovered lines. Ask yourself: "Would a user care if this line broke?" If yes, write a test. If no, leave it.
 
 ---
-id: 17-testing
 
 ## 📚 Further Reading
 
@@ -678,7 +665,6 @@ id: 17-testing
 - [React docs: Testing](https://react.dev/learn/testing) — official React testing guidance
 
 ---
-id: 17-testing
 
 **🎉 Congratulations!** You've built a complete React application from scratch — from mental models to tested, polished, production-grade UI with shadcn, Tailwind, and React 19.
 

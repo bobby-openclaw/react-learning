@@ -100,7 +100,7 @@ Three patterns, each for different situations:
 **Early return** — when a condition means "don't render at all":
 
 ```tsx
-function AdminPanel({ user }: { user: User }) {
+const AdminPanel = ({ user }: { user: User }) => {
   if (!user.isAdmin) return null; // bail out early
   return <div>Secret admin stuff</div>;
 }
@@ -126,7 +126,7 @@ Use `.map()` to turn an array of data into an array of elements:
 ```tsx
 const fruits = ['Apple', 'Banana', 'Cherry'];
 
-function FruitList() {
+const FruitList = () => {
   return (
     <ul>
       {fruits.map((fruit) => (
@@ -177,7 +177,7 @@ interface GreetingProps {
   excited?: boolean; // optional prop
 }
 
-function Greeting({ name, excited = false }: GreetingProps) {
+const Greeting = ({ name, excited = false }: GreetingProps) => {
   return <h1>Hello, {name}{excited ? '!!!' : '.'}</h1>;
 }
 
@@ -194,7 +194,7 @@ A component must **never modify its own props**. They're like function arguments
 
 ```tsx
 // ❌ NEVER do this
-function BadComponent(props: { name: string }) {
+const BadComponent = (props: { name: string }) => {
   props.name = 'hacked'; // This is wrong (and TypeScript will yell at you)
   return <div>{props.name}</div>;
 }
@@ -207,7 +207,7 @@ If a child needs to communicate back to the parent, the parent passes a **callba
 <TaskCard task={task} onDelete={() => deleteTask(task.id)} />
 
 // Child calls it
-function TaskCard({ task, onDelete }: TaskCardProps) {
+const TaskCard = ({ task, onDelete }: TaskCardProps) => {
   return (
     <div>
       <span>{task.title}</span>
@@ -222,7 +222,7 @@ function TaskCard({ task, onDelete }: TaskCardProps) {
 Use JavaScript default parameters — no special React API needed:
 
 ```tsx
-function Button({ variant = 'primary', size = 'md' }: ButtonProps) {
+const Button = ({ variant = 'primary', size = 'md' }: ButtonProps) => {
   return <button className={`btn-${variant} btn-${size}`}>Click</button>;
 }
 ```
@@ -298,7 +298,7 @@ interface TaskCardProps {
   task: Task;
 }
 
-function TaskCard({ task }: TaskCardProps) {
+const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <div className="task-card">
       <span className={task.completed ? 'completed' : ''}>
@@ -322,7 +322,7 @@ This component is:
 > ```tsx
 > // React 18 — boilerplate!
 > const TaskCard = forwardRef<HTMLDivElement, TaskCardProps>(
->   function TaskCard({ task }, ref) {
+>   const TaskCard = ({ task }, ref) => {
 >     return <div ref={ref} className="task-card">...</div>;
 >   }
 > );
@@ -332,12 +332,12 @@ This component is:
 >
 > ```tsx
 > // React 19 — clean!
-> function TaskCard({ task, ref }: TaskCardProps & { ref?: React.Ref<HTMLDivElement> }) {
+> const TaskCard = ({ task, ref }: TaskCardProps & { ref?: React.Ref<HTMLDivElement> }) => {
 >   return <div ref={ref} className="task-card">...</div>;
 > }
 > ```
 >
-> You don't need to understand refs yet (we cover them in Chapter 10), but know that React 19 killed a lot of boilerplate here. `forwardRef` will eventually be deprecated.
+> You don't need to understand refs yet (they let you directly access DOM elements), but know that React 19 killed a lot of boilerplate here. `forwardRef` will eventually be deprecated.
 
 ---
 
@@ -346,7 +346,7 @@ This component is:
 ### Example 1: JSX Expressions
 
 ```tsx
-function UserGreeting({ user }: { user: { name: string; age: number; isVIP: boolean } }) {
+const UserGreeting = ({ user }: { user: { name: string; age: number; isVIP: boolean } }) => {
   return (
     <div>
       <h2>Welcome, {user.name}!</h2>
@@ -367,7 +367,7 @@ interface Pokemon {
   type: string;
 }
 
-function PokemonList({ pokemon }: { pokemon: Pokemon[] }) {
+const PokemonList = ({ pokemon }: { pokemon: Pokemon[] }) => {
   if (pokemon.length === 0) {
     return <p>No Pokémon found. Touch grass.</p>;
   }
@@ -393,7 +393,7 @@ interface AlertProps {
   dismissible?: boolean;
 }
 
-function Alert({ message, severity, dismissible = true }: AlertProps) {
+const Alert = ({ message, severity, dismissible = true }: AlertProps) => {
   const icons = {
     info: 'ℹ️',
     warning: '⚠️',
@@ -413,7 +413,7 @@ function Alert({ message, severity, dismissible = true }: AlertProps) {
 ### Example 4: Fragments and Multiple Elements
 
 ```tsx
-function UserStats({ posts, followers }: { posts: number; followers: number }) {
+const UserStats = ({ posts, followers }: { posts: number; followers: number }) => {
   return (
     <>
       <dt>Posts</dt>
@@ -425,7 +425,7 @@ function UserStats({ posts, followers }: { posts: number; followers: number }) {
 }
 
 // Usage — Fragment lets you return multiple <dt>/<dd> without wrapper div
-function Profile() {
+const Profile = () => {
   return (
     <dl>
       <UserStats posts={142} followers={3800} />
@@ -467,7 +467,7 @@ rm src/App.css src/assets/react.svg
 Replace `src/App.tsx` with a clean starting point:
 
 ```tsx
-function App() {
+const App = () => {
   return (
     <div className="app">
       <h1>TaskFlow</h1>
@@ -553,7 +553,7 @@ interface TaskCardProps {
   task: Task;
 }
 
-function TaskCard({ task }: TaskCardProps) {
+const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <div className="task-card">
       <span className={task.completed ? 'completed' : ''}>
@@ -599,7 +599,7 @@ const SAMPLE_TASKS: Task[] = [
   },
 ];
 
-function App() {
+const App = () => {
   return (
     <div className="app">
       <h1>📋 TaskFlow</h1>
@@ -661,6 +661,6 @@ Run `npm run dev` and check your browser. You should see:
 
 ---
 
-**Next up: [Chapter 2 — State & Events →](../02-state-and-events/CHAPTER.md)**
+**Next up: [Chapter 2 — State & Events →](/chapters/02-state-and-events)**
 
 Right now TaskFlow is static — a snapshot frozen in time. In the next chapter, we'll add state and event handling to make tasks addable, deletable, and completable.

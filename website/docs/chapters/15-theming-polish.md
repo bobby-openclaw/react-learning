@@ -11,7 +11,6 @@ title: "Chapter 15: Theming & Polish"
 > **📌 Prerequisite:** Chapters 9-10 (Tailwind), 11-12 (shadcn setup and components), 13-14 (DataTable and forms).
 
 ---
-id: 15-theming-polish
 
 ## 🧠 Concepts
 
@@ -276,7 +275,6 @@ shadcn components handle ARIA attributes, but *your layout and interactions* nee
 - shadcn components handle this — but verify your custom compositions
 
 ---
-id: 15-theming-polish
 
 ## 💡 Examples
 
@@ -708,7 +706,6 @@ useEffect(() => {
 ```
 
 ---
-id: 15-theming-polish
 
 ## 🔨 Project Task: Polish TaskFlow
 
@@ -796,7 +793,6 @@ Use browser DevTools to test at:
 Verify: sidebar collapses, table scrolls or adapts, forms stack vertically, cards reflow.
 
 ---
-id: 15-theming-polish
 
 ## 🧪 Challenge
 
@@ -838,7 +834,6 @@ Add smooth transitions when switching themes:
 Be careful — transitioning *everything* can cause performance issues. Target specific properties or use `will-change` strategically.
 
 ---
-id: 15-theming-polish
 
 ## 📚 Further Reading
 
@@ -851,7 +846,6 @@ id: 15-theming-polish
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/) — accessibility guidelines
 
 ---
-id: 15-theming-polish
 
 **Next up: [Chapter 16 — Performance →](/chapters/16-performance)**
 

@@ -291,7 +291,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "light";
     return (localStorage.getItem("taskflow-theme") as Theme) ?? "light";
@@ -356,7 +356,7 @@ const themeConfig = {
   sunset: { label: "Sunset", icon: Sunset, preview: "bg-orange-500" },
 } as const;
 
-export function ThemeSwitcher() {
+export const ThemeSwitcher = () => {
   const { theme, setTheme, themes } = useTheme();
   const CurrentIcon = themeConfig[theme as keyof typeof themeConfig]?.icon ?? Palette;
 
@@ -559,7 +559,7 @@ const navItems = [
   { title: "Settings", icon: Settings, path: "/settings" },
 ];
 
-export function AppSidebar() {
+export const AppSidebar = () => {
   const location = useLocation();
 
   return (
@@ -608,7 +608,7 @@ export function AppSidebar() {
 }
 
 // App layout wrapper
-export function AppLayout({ children }: { children: React.ReactNode }) {
+export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
@@ -630,7 +630,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // A dashboard that adapts from 1 column on mobile to 3 on desktop
-function Dashboard() {
+const Dashboard = () => {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <Card>
@@ -740,7 +740,7 @@ Create `src/components/layout/app-sidebar.tsx` following Example 4. Include:
 Wrap your router with `<AppLayout>`:
 
 ```tsx
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <AppLayout>
@@ -841,6 +841,6 @@ Be careful — transitioning *everything* can cause performance issues. Target s
 
 ---
 
-**Next up: [Chapter 16 — Performance →](../16-performance/CHAPTER.md)**
+**Next up: [Chapter 16 — Performance →](/chapters/16-performance)**
 
 TaskFlow looks great. Now let's make sure it *feels* great — profiling, memoization, code splitting, and the React Compiler that makes most of this automatic.

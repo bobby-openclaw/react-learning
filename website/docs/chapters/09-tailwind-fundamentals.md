@@ -11,7 +11,6 @@ title: "Chapter 9: Tailwind CSS Fundamentals"
 > **📌 Where we are:** TaskFlow is fully functional — routing (Ch 7), validated forms (Ch 8), custom hooks, context. But it looks like a 1995 website. This chapter (and Ch 10) fix that. By the end, TaskFlow will have a modern, responsive design.
 
 ---
-id: 09-tailwind-fundamentals
 
 ## 🧠 Concepts
 
@@ -173,7 +172,6 @@ Apply styles on specific states:
 ```
 
 ---
-id: 09-tailwind-fundamentals
 
 ## 💡 Examples
 
@@ -332,7 +330,6 @@ export default function TaskCard({
 Notice: `group` on the parent + `group-hover:` on children. The "View →" link only appears when you hover the card. No JavaScript needed.
 
 ---
-id: 09-tailwind-fundamentals
 
 ## 🔨 Project Task: Rebuild TaskFlow with Tailwind
 
@@ -567,7 +564,6 @@ The sidebar uses `hidden md:flex` — invisible on mobile, visible from `md` bre
 - [ ] No visual regressions from the CSS rewrite
 
 ---
-id: 09-tailwind-fundamentals
 
 ## 🧪 Challenge
 
@@ -593,7 +589,6 @@ id: 09-tailwind-fundamentals
 3. **Responsive detail page:** Make the TaskDetail page show the sidebar info below the main content on mobile, and beside it on desktop using `flex-col md:flex-row`.
 
 ---
-id: 09-tailwind-fundamentals
 
 ## 📚 Further Reading
 
@@ -604,7 +599,6 @@ id: 09-tailwind-fundamentals
 - [Why Tailwind (by its creator)](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) — the philosophy explained
 
 ---
-id: 09-tailwind-fundamentals
 
 **Next up: [Chapter 10 — Advanced Tailwind →](/chapters/10-advanced-tailwind)**
 

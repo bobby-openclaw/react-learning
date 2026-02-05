@@ -11,7 +11,6 @@ title: "Chapter 1: Setup & Your First Component"
 > **📌 Prerequisites:** You've read Chapter 0 and understand React's mental model — declarative UI, components as functions, data flows down, state is immutable.
 
 ---
-id: 01-setup-first-component
 
 ## 🧠 Concepts
 
@@ -66,7 +65,6 @@ createRoot(document.getElementById('root')!).render(<App />);
 `createRoot` is React 18+'s way of initializing — it enables concurrent features like automatic batching and transitions.
 
 ---
-id: 01-setup-first-component
 
 ### 2. JSX Deep Dive
 
@@ -173,7 +171,6 @@ Every list item needs a **`key`** prop. We'll dive into why next.
 4. **Style is an object** — `style={{ color: 'red', fontSize: 16 }}` (not a string)
 
 ---
-id: 01-setup-first-component
 
 ### 3. Props: Passing Data to Components
 
@@ -237,7 +234,6 @@ const Button = ({ variant = 'primary', size = 'md' }: ButtonProps) => {
 ```
 
 ---
-id: 01-setup-first-component
 
 ### 4. The `key` Prop: Why Lists Need It
 
@@ -290,7 +286,6 @@ One removal. Correct and fast.
 ```
 
 ---
-id: 01-setup-first-component
 
 ### 5. Your First Component: `<TaskCard />`
 
@@ -348,10 +343,9 @@ This component is:
 > }
 > ```
 >
-> You don't need to understand refs yet (we cover them in Chapter 10), but know that React 19 killed a lot of boilerplate here. `forwardRef` will eventually be deprecated.
+> You don't need to understand refs yet (they let you directly access DOM elements), but know that React 19 killed a lot of boilerplate here. `forwardRef` will eventually be deprecated.
 
 ---
-id: 01-setup-first-component
 
 ## 💡 Examples
 
@@ -447,7 +441,6 @@ const Profile = () => {
 ```
 
 ---
-id: 01-setup-first-component
 
 ## 🔨 Project Task: Set Up TaskFlow
 
@@ -650,7 +643,6 @@ Run `npm run dev` and check your browser. You should see:
 🎉 **Your first React components are alive!**
 
 ---
-id: 01-setup-first-component
 
 ## 🧪 Challenge
 
@@ -664,7 +656,6 @@ id: 01-setup-first-component
    ```
 
 ---
-id: 01-setup-first-component
 
 ## 📚 Further Reading
 
@@ -675,7 +666,6 @@ id: 01-setup-first-component
 - [Vite docs: Getting Started](https://vite.dev/guide/) — understanding your build tool
 
 ---
-id: 01-setup-first-component
 
 **Next up: [Chapter 2 — State & Events →](/chapters/02-state-and-events)**
 
