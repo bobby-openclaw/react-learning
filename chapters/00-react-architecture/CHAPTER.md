@@ -197,10 +197,15 @@ Virtual DOM (new)          Virtual DOM (previous)
 
 React compares the new virtual DOM with the previous one. It finds the **minimum set of changes**:
 
-```diff
-- <h1>"2"</h1>
-+ <h1>"3"</h1>
-+ <li>New Player</li>      ← added
+```
+    PREVIOUS VDOM              NEW VDOM                 DIFF RESULT
+    ─────────────              ────────                 ───────────
+        <div>                    <div>
+        /    \                   /    \
+     <h1>    <ul>    ──→     <h1>    <ul>         • Update <h1> text: "2" → "3"
+     "2"    /   \            "3"    / | \         • Append new <li>
+          <li> <li>              <li><li><li>
+          "A"  "B"               "A" "B" "C"
 ```
 
 This is called **reconciliation** or "diffing." React uses clever heuristics:
@@ -210,28 +215,28 @@ This is called **reconciliation** or "diffing." React uses clever heuristics:
 
 #### Step 4: Commit
 
-React applies **only the calculated changes** to the real DOM. In our example, it would:
-1. Update the text content of the `<h1>` from "2" to "3"
-2. Append a new `<li>` to the `<ul>`
+React applies **only the calculated changes** to the real DOM:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         THE REACT RENDER CYCLE                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌──────────┐    ┌────────────────┐    ┌──────────────┐    ┌────────────┐ │
+│   │ TRIGGER  │───▶│     RENDER     │───▶│    DIFF      │───▶│   COMMIT   │ │
+│   └──────────┘    └────────────────┘    └──────────────┘    └────────────┘ │
+│        │                  │                    │                   │        │
+│        │                  │                    │                   │        │
+│   • setState()     • Call component     • Compare old        • Apply only   │
+│   • Initial load     functions            vs new VDOM          changes to   │
+│   • Parent          • Build new VDOM    • Find minimum          real DOM    │
+│     re-render       • (JS objects,        changes             • Browser     │
+│                       NOT DOM)                                  repaints    │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 It does NOT re-create the entire DOM. That's the performance win.
-
-```
-                    ┌─────────────┐
-  State Change ───→ │   Render    │ (call component functions)
-                    │  (Virtual)  │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │    Diff     │ (compare old vs new virtual DOM)
-                    │  (Recon.)   │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │   Commit    │ (apply minimal changes to real DOM)
-                    │  (Real DOM) │
-                    └─────────────┘
-```
 
 **Why not just update the real DOM directly?** Because DOM operations are expensive. By batching and minimizing changes, React avoids unnecessary layout recalculations, repaints, and reflows.
 

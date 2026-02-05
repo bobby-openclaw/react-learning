@@ -47,11 +47,29 @@ Don't create a component for every `<div>`. Premature abstraction is real:
 Props drilling is when you pass data through multiple layers of components to reach a deeply nested one:
 
 ```
-App (has tasks state)
-  └─ Main
-      └─ TaskSection
-          └─ TaskList
-              └─ TaskCard (needs tasks and handlers!)
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            PROPS DRILLING PROBLEM                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   App                                                                        │
+│   ├── state: { tasks, onToggle, onDelete }                                   │
+│   │                                                                          │
+│   └── Main ◄─────────────────── receives: tasks, onToggle, onDelete         │
+│       │                         uses: NONE (just passes through!)            │
+│       │                                                                      │
+│       └── TaskSection ◄──────── receives: tasks, onToggle, onDelete         │
+│           │                     uses: NONE (just passes through!)            │
+│           │                                                                  │
+│           └── TaskList ◄─────── receives: tasks, onToggle, onDelete         │
+│               │                 uses: tasks (maps over them)                 │
+│               │                                                              │
+│               └── TaskCard ◄─── receives: task, onToggle, onDelete          │
+│                                 uses: ALL ✓                                  │
+│                                                                              │
+│   Main and TaskSection don't use the props — they just forward them.        │
+│   Every new prop = edit 4 files. This is the "drilling" problem.            │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 Every intermediate component (`Main`, `TaskSection`) must accept and pass down props it doesn't use itself.

@@ -37,12 +37,30 @@ Context is React's built-in dependency injection. It has three parts:
 3. **Consume** — any descendant reads the value directly
 
 ```
-        <ThemeContext value="dark">     ← Provider
-            /          \
-      <Header>       <Main>             ← These don't need theme props
-         |              |
-      <Logo>        <TaskCard>          ← These consume context directly
-    use(ThemeContext)  use(ThemeContext)
+┌───────────────────────────────────────────────────────────────────────────┐
+│           PROPS DRILLING                    vs           CONTEXT          │
+├───────────────────────────────────────────────────────────────────────────┤
+│                                                                           │
+│        App (theme)                              App                       │
+│            │                                      │                       │
+│     ┌──────┴──────┐                        ┌──────┴──────┐               │
+│     │ theme prop  │                        │ <ThemeContext>               │
+│     ▼             ▼                        │   value="dark"               │
+│  Layout ──────▶ Sidebar                    ▼             ▼               │
+│     │             │                     Layout        Sidebar            │
+│ theme prop    theme prop                   │             │               │
+│     ▼             ▼                        │             │               │
+│  Header        Nav                      Header         Nav               │
+│     │                                      │             │               │
+│ theme prop                          ┌──────┘             └──────┐       │
+│     ▼                               ▼                           ▼       │
+│   Logo                            Logo ◀───────────────────▶ MenuItem    │
+│                                use(ThemeContext)          use(ThemeContext)
+│                                      │                           │       │
+│  Every component                     └───── "teleports" ─────────┘       │
+│  passes theme down                         directly to consumers         │
+│                                                                           │
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 The data "teleports" from provider to consumer, skipping all intermediate components.

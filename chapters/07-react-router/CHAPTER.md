@@ -63,6 +63,26 @@ React Router uses a component-based approach. Here's the hierarchy:
 
 **`Route`** — Maps a `path` to an `element` (a React component).
 
+Here's how URLs map to components:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           URL → COMPONENT MAPPING                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   URL                         MATCHES                RENDERS                 │
+│   ───                         ───────                ───────                 │
+│   /                     ───▶  "/" (index)      ───▶  <Layout> + <Dashboard>  │
+│   /settings             ───▶  "/settings"      ───▶  <Layout> + <Settings>   │
+│   /task/abc-123         ───▶  "/task/:id"      ───▶  <Layout> + <TaskDetail> │
+│   /task/xyz-789         ───▶  "/task/:id"      ───▶  <Layout> + <TaskDetail> │
+│   /anything-else        ───▶  "*"              ───▶  <NotFound>              │
+│                                                                              │
+│   :id is a "dynamic segment" — matches any value, accessible via useParams() │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
 ### 4. Nested Routes & Layouts
 
 This is where React Router shines. **Nested routes** let you create persistent layouts — a sidebar that stays visible while the main content changes.

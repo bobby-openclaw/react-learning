@@ -91,10 +91,40 @@ React 19 lets you pass an async function directly to `<form action>`:
 </form>
 ```
 
-What React 19 does automatically:
-- Calls your function with a `FormData` object on submit
-- Resets the form after successful completion
-- Integrates with `useActionState` for pending/error state
+Here's what happens under the hood:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    REACT 19 FORM ACTION FLOW                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   USER CLICKS           REACT 19                    YOUR ACTION              │
+│   "Submit"              INTERCEPTS                  FUNCTION                 │
+│       │                     │                           │                    │
+│       ▼                     ▼                           ▼                    │
+│   ┌───────┐           ┌───────────┐              ┌───────────┐              │
+│   │ click │──────────▶│ Collect   │─────────────▶│ async fn  │              │
+│   │ event │           │ FormData  │              │ receives  │              │
+│   └───────┘           └───────────┘              │ FormData  │              │
+│                             │                    └─────┬─────┘              │
+│                             │                          │                    │
+│                       ┌─────▼─────┐                    │                    │
+│                       │isPending: │◀───────────────────┤                    │
+│                       │  true     │                    │                    │
+│                       └───────────┘               ┌────▼────┐               │
+│                             │                     │ await   │               │
+│                             │                     │ saveTask│               │
+│                             │                     └────┬────┘               │
+│                       ┌─────▼─────┐                    │                    │
+│                       │isPending: │◀───────────────────┘                    │
+│                       │  false    │         success/error                   │
+│                       │form reset │                                         │
+│                       └───────────┘                                         │
+│                                                                              │
+│   No e.preventDefault() needed. No manual state. React handles it all.      │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 **This is not the same as HTML native form submission.** React intercepts the submit, calls your function client-side, and manages the lifecycle.
 
