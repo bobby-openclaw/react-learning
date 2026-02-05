@@ -162,7 +162,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 
-export default function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
@@ -177,7 +177,7 @@ export default function App() {
 ```tsx
 import { Link, NavLink } from "react-router-dom";
 
-function Sidebar() {
+const Sidebar = () => {
   return (
     <nav>
       {/* Basic link */}
@@ -217,7 +217,7 @@ interface Task {
   description: string;
 }
 
-export default function TaskDetail() {
+const TaskDetail = () => {
   const { id } = useParams<{ id: string }>();
 
   // In a real app, you'd fetch or look up the task by id
@@ -236,7 +236,7 @@ export default function TaskDetail() {
 ```tsx
 import { useNavigate } from "react-router-dom";
 
-function TaskForm() {
+const TaskForm = () => {
   const navigate = useNavigate();
 
   function handleSubmit(data: TaskFormData) {
@@ -268,7 +268,7 @@ import TaskDetail from "./pages/TaskDetail";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
-export default function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -288,7 +288,7 @@ export default function App() {
 // src/components/Layout.tsx
 import { Outlet, NavLink } from "react-router-dom";
 
-export default function Layout() {
+const Layout = () => {
   return (
     <div className="app-layout">
       <aside className="sidebar">
@@ -316,7 +316,7 @@ export default function Layout() {
 ```tsx
 import { Link } from "react-router-dom";
 
-function TaskCard({ task }: { task: Task }) {
+const TaskCard = ({ task }: { task: Task }) => {
   return (
     <Link to={`/task/${task.id}`} className="task-card">
       <h3>{task.title}</h3>
@@ -349,7 +349,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { TaskContext } from "../context/TaskContext";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const { tasks } = useContext(TaskContext);
 
   return (
@@ -400,7 +400,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 
-export default function TaskDetail() {
+const TaskDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { tasks, deleteTask } = useContext(TaskContext);
   const navigate = useNavigate();
@@ -462,7 +462,7 @@ export default function TaskDetail() {
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-export default function Settings() {
+const Settings = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -495,7 +495,7 @@ export default function Settings() {
 ```tsx
 import { Outlet, NavLink } from "react-router-dom";
 
-export default function Layout() {
+const Layout = () => {
   return (
     <div className="app-layout">
       <aside className="sidebar">
@@ -565,7 +565,7 @@ import Dashboard from "./pages/Dashboard";
 import TaskDetail from "./pages/TaskDetail";
 import Settings from "./pages/Settings";
 
-export default function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -578,7 +578,7 @@ export default function App() {
   );
 }
 
-function NotFound() {
+const NotFound = () => {
   return (
     <div className="not-found-page">
       <h1>404</h1>

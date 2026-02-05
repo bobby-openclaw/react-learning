@@ -86,7 +86,7 @@ Every intermediate component (`Main`, `TaskSection`) must accept and pass down p
 // App → Main → TaskSection → TaskList → TaskCard
 // Every layer just passing things through 😩
 
-function Main({ tasks, onToggle, onDelete }: MainProps) {
+const Main = ({ tasks, onToggle, onDelete }: MainProps) => {
   return (
     <main>
       <TaskSection tasks={tasks} onToggle={onToggle} onDelete={onDelete} />
@@ -125,7 +125,7 @@ interface CardProps {
   children: React.ReactNode;
 }
 
-function Card({ title, children }: CardProps) {
+const Card = ({ title, children }: CardProps) => {
   return (
     <div className="card">
       <h3>{title}</h3>
@@ -151,12 +151,12 @@ Here's the key insight. Instead of this:
 
 ```tsx
 // ❌ Drilling: App passes tasks through Layout to reach TaskList
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   return <Layout tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />;
 }
 
-function Layout({ tasks, onToggle, onDelete }: LayoutProps) {
+const Layout = ({ tasks, onToggle, onDelete }: LayoutProps) => {
   return (
     <main>
       <TaskList tasks={tasks} onToggle={onToggle} onDelete={onDelete} />
@@ -169,7 +169,7 @@ Use composition:
 
 ```tsx
 // ✅ Composition: App renders TaskList directly, Layout just wraps
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   return (
     <Layout>
@@ -178,7 +178,7 @@ function App() {
   );
 }
 
-function Layout({ children }: { children: React.ReactNode }) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return <main className="layout">{children}</main>;
 }
 ```
@@ -198,7 +198,7 @@ interface PageLayoutProps {
   children: React.ReactNode;
 }
 
-function PageLayout({ header, sidebar, children }: PageLayoutProps) {
+const PageLayout = ({ header, sidebar, children }: PageLayoutProps) => {
   return (
     <div className="page">
       <header>{header}</header>
@@ -228,7 +228,7 @@ interface MouseTrackerProps {
   children: (position: { x: number; y: number }) => React.ReactNode;
 }
 
-function MouseTracker({ children }: MouseTrackerProps) {
+const MouseTracker = ({ children }: MouseTrackerProps) => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   return (
     <div onMouseMove={(e) => setPos({ x: e.clientX, y: e.clientY })}>
@@ -295,7 +295,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-function Button({ children, variant = 'primary', disabled, onClick }: ButtonProps) {
+const Button = ({ children, variant = 'primary', disabled, onClick }: ButtonProps) => {
   return (
     <button
       className={`btn btn-${variant}`}
@@ -364,7 +364,7 @@ interface EmptyStateProps {
   action?: React.ReactNode;
 }
 
-function EmptyState({ icon, message, action }: EmptyStateProps) {
+const EmptyState = ({ icon, message, action }: EmptyStateProps) => {
   return (
     <div className="empty-state">
       <span className="icon">{icon}</span>
@@ -434,7 +434,7 @@ interface GlassCardProps {
   className?: string;
 }
 
-function GlassCard({ children, className = '' }: GlassCardProps) {
+const GlassCard = ({ children, className = '' }: GlassCardProps) => {
   return (
     <div className={`glass-card ${className}`}>
       {children}
@@ -488,7 +488,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-function Layout({ children }: LayoutProps) {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="app">
       <header className="app-header">
@@ -514,7 +514,7 @@ interface EmptyStateProps {
   message: string;
 }
 
-function EmptyState({ icon = '📝', message }: EmptyStateProps) {
+const EmptyState = ({ icon = '📝', message }: EmptyStateProps) => {
   return (
     <div className="empty">
       <span style={{ fontSize: '2rem' }}>{icon}</span>
@@ -544,7 +544,7 @@ interface TaskListProps {
   onDelete: (id: string) => void;
 }
 
-function TaskList({ tasks, emptyMessage = 'No tasks yet.', onToggle, onDelete }: TaskListProps) {
+const TaskList = ({ tasks, emptyMessage = 'No tasks yet.', onToggle, onDelete }: TaskListProps) => {
   if (tasks.length === 0) {
     return <EmptyState message={emptyMessage} />;
   }
@@ -598,7 +598,7 @@ const INITIAL_TASKS: Task[] = [
   { id: '3', title: 'Master TypeScript', completed: false, createdAt: new Date('2026-02-03') },
 ];
 
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [filter, setFilter] = useState<Filter>('all');
 

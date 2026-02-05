@@ -186,7 +186,7 @@ Need a submit button component in your design system that automatically knows if
 ```tsx
 import { useFormStatus } from "react-dom";
 
-function SubmitButton({ label = "Save" }: { label?: string }) {
+const SubmitButton = ({ label = "Save" }: { label?: string }) => {
   const { pending } = useFormStatus();
 
   return (
@@ -340,7 +340,7 @@ async function createTaskAction(
   }
 }
 
-function SubmitButton() {
+const SubmitButton = () => {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending}>
@@ -349,7 +349,7 @@ function SubmitButton() {
   );
 }
 
-export default function QuickAddForm() {
+const QuickAddForm = () => {
   const [state, formAction, isPending] = useActionState(createTaskAction, {
     error: null,
   });
@@ -379,7 +379,7 @@ interface Task {
   status: "todo" | "in-progress" | "done";
 }
 
-function TaskList({ tasks, toggleTask }: {
+const TaskList = ({ tasks, toggleTask }: {
   tasks: Task[];
   toggleTask: (id: string) => Promise<void>;
 }) {
@@ -591,7 +591,7 @@ import { TaskContext } from "../context/TaskContext";
 import TaskForm from "../components/TaskForm";
 import type { TaskFormData } from "../schemas/task";
 
-export default function EditTask() {
+const EditTask = () => {
   const { id } = useParams<{ id: string }>();
   const { tasks, updateTask } = useContext(TaskContext);
   const navigate = useNavigate();
@@ -651,7 +651,7 @@ import { useActionState, useContext } from "react";
 import { useFormStatus } from "react-dom";
 import { TaskContext } from "../context/TaskContext";
 
-function AddButton() {
+const AddButton = () => {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending}>
@@ -660,7 +660,7 @@ function AddButton() {
   );
 }
 
-export default function QuickAdd() {
+const QuickAdd = () => {
   const { addTask } = useContext(TaskContext);
 
   const [error, formAction] = useActionState(

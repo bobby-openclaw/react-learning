@@ -48,7 +48,7 @@ Now imagine this for a full app with hundreds of interactive elements. It become
 
 ```jsx
 // Declarative: describe what you want
-function Scoreboard({ homeScore, players }) {
+const Scoreboard = ({ homeScore, players }) => {
   return (
     <div>
       <span className="score">{homeScore}</span>
@@ -86,7 +86,7 @@ state: { count: 2 }  →  f(state)  →  <button>Count: 2</button>
 This is why React components are literally JavaScript functions:
 
 ```jsx
-function Counter({ count }) {    // Input: state/props
+const Counter = ({ count }) => {    // Input: state/props
   return <button>Count: {count}</button>;  // Output: UI
 }
 ```
@@ -263,7 +263,7 @@ A very common misconception:
 **Nope.** Rendering means React *called your function* and *diffed the result*. If nothing changed, React does **nothing** to the DOM. The browser never repaints.
 
 ```jsx
-function Greeting({ name }) {
+const Greeting = ({ name }) => {
   console.log('I rendered!'); // This runs...
   return <h1>Hello, {name}</h1>; // ...but if name didn't change, DOM is untouched
 }
@@ -284,7 +284,7 @@ State is data that:
 3. **Triggers a re-render when it changes**
 
 ```jsx
-function Counter() {
+const Counter = () => {
   const [count, setCount] = useState(0);  // state!
   return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }

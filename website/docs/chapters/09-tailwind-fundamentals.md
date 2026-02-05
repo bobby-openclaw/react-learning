@@ -377,7 +377,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
   }`;
 
-export default function Layout() {
+const Layout = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
@@ -418,7 +418,7 @@ import { Link } from "react-router-dom";
 import { TaskContext } from "../context/TaskContext";
 import QuickAdd from "../components/QuickAdd";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const { tasks } = useContext(TaskContext);
 
   const counts = {

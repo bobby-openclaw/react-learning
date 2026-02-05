@@ -183,7 +183,7 @@ React events work like DOM events, with a few twists:
 #### Named Handlers
 
 ```tsx
-function Counter() {
+const Counter = () => {
   const [count, setCount] = useState(0);
 
   const handleClick = () => {
@@ -241,7 +241,7 @@ id: 02-state-and-events
 A **controlled component** is a form element whose value is driven by React state. React is the "single source of truth" — the input displays what state says.
 
 ```tsx
-function SearchBox() {
+const SearchBox = () => {
   const [query, setQuery] = useState('');
 
   return (
@@ -303,7 +303,7 @@ You already saw these in Chapter 1, but let's solidify with real examples now th
 #### Early Return — Don't render this component
 
 ```tsx
-function TaskList({ tasks }: { tasks: Task[] }) {
+const TaskList = ({ tasks }: { tasks: Task[] }) => {
   if (tasks.length === 0) {
     return <p className="empty">No tasks yet. Add one above! ☝️</p>;
   }
@@ -365,7 +365,7 @@ id: 02-state-and-events
 ### Example 1: Counter with Multiple Operations
 
 ```tsx
-function Counter() {
+const Counter = () => {
   const [count, setCount] = useState(0);
 
   return (
@@ -388,7 +388,7 @@ interface Profile {
   location: string;
 }
 
-function ProfileEditor() {
+const ProfileEditor = () => {
   const [profile, setProfile] = useState<Profile>({
     name: '',
     bio: '',
@@ -425,7 +425,7 @@ function ProfileEditor() {
 ### Example 3: Array State — Tag Manager
 
 ```tsx
-function TagManager() {
+const TagManager = () => {
   const [tags, setTags] = useState<string[]>(['react', 'typescript']);
   const [input, setInput] = useState('');
 
@@ -489,7 +489,7 @@ const INITIAL_TASKS: Task[] = [
 
 type Filter = 'all' | 'active' | 'completed';
 
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [filter, setFilter] = useState<Filter>('all');
 
@@ -566,7 +566,7 @@ interface TaskFormProps {
   onAdd: (title: string) => void;
 }
 
-function TaskForm({ onAdd }: TaskFormProps) {
+const TaskForm = ({ onAdd }: TaskFormProps) => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -616,7 +616,7 @@ interface TaskFiltersProps {
 
 const FILTERS: Filter[] = ['all', 'active', 'completed'];
 
-function TaskFilters({ current, onChange }: TaskFiltersProps) {
+const TaskFilters = ({ current, onChange }: TaskFiltersProps) => {
   return (
     <div className="task-filters">
       {FILTERS.map((f) => (
@@ -648,7 +648,7 @@ interface TaskCardProps {
   onDelete: () => void;
 }
 
-function TaskCard({ task, onToggle, onDelete }: TaskCardProps) {
+const TaskCard = ({ task, onToggle, onDelete }: TaskCardProps) => {
   return (
     <div className="task-card">
       <input

@@ -255,7 +255,7 @@ Wire this up with the `ThemeContext` from Chapter 5:
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-export default function ThemeToggle() {
+const ThemeToggle = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -309,7 +309,7 @@ const priorityConfig = {
   },
 } as const;
 
-function PriorityBadge({ priority }: { priority: "low" | "medium" | "high" }) {
+const PriorityBadge = ({ priority }: { priority: "low" | "medium" | "high" }) => {
   const config = priorityConfig[priority];
   return (
     <span
@@ -326,7 +326,7 @@ function PriorityBadge({ priority }: { priority: "low" | "medium" | "high" }) {
 ### Animated Task Card
 
 ```tsx
-function TaskCard({ task, index }: { task: Task; index: number }) {
+const TaskCard = ({ task, index }: { task: Task; index: number }) => {
   return (
     <div
       className="animate-slide-in rounded-lg border border-gray-200 bg-white p-4
@@ -355,7 +355,7 @@ The `style={{ animationDelay }}` creates a staggered entrance — each card slid
 ### Loading Skeleton
 
 ```tsx
-function TaskCardSkeleton() {
+const TaskCardSkeleton = () => {
   return (
     <div className="animate-pulse rounded-lg border border-gray-200 bg-white p-4
                    dark:border-gray-700 dark:bg-gray-800">
@@ -371,7 +371,7 @@ function TaskCardSkeleton() {
   );
 }
 
-function TaskListSkeleton({ count = 5 }: { count?: number }) {
+const TaskListSkeleton = ({ count = 5 }: { count?: number }) => {
   return (
     <div className="space-y-3">
       {Array.from({ length: count }).map((_, i) => (
@@ -454,7 +454,7 @@ export const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 });
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     const stored = localStorage.getItem("taskflow-theme");
     if (stored === "dark" || stored === "light") return stored;

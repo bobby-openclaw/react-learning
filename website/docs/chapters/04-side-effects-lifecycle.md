@@ -21,7 +21,7 @@ A **pure function** always returns the same output for the same input and doesn'
 
 ```tsx
 // Pure — same task always produces the same card
-function TaskCard({ task }: { task: Task }) {
+const TaskCard = ({ task }: { task: Task }) => {
   return <div>{task.title}</div>;
 }
 ```
@@ -353,7 +353,7 @@ id: 04-side-effects-lifecycle
 The traditional pattern for fetching data:
 
 ```tsx
-function UserProfile({ userId }: { userId: string }) {
+const UserProfile = ({ userId }: { userId: string }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -411,7 +411,7 @@ id: 04-side-effects-lifecycle
 > ```tsx
 > import { use, Suspense } from 'react';
 >
-> function Comments({ commentsPromise }: { commentsPromise: Promise<Comment[]> }) {
+> const Comments = ({ commentsPromise }: { commentsPromise: Promise<Comment[]> }) => {
 >   const comments = use(commentsPromise); // suspends until resolved
 >
 >   return (
@@ -424,7 +424,7 @@ id: 04-side-effects-lifecycle
 > }
 >
 > // Parent creates the promise and wraps with Suspense
-> function Post({ postId }: { postId: string }) {
+> const Post = ({ postId }: { postId: string }) => {
 >   const commentsPromise = fetchComments(postId); // start fetching
 >
 >   return (
@@ -460,7 +460,7 @@ id: 04-side-effects-lifecycle
 > **Before vs. After:**
 > ```tsx
 > // BEFORE (React 18) — useEffect dance
-> function Comments({ postId }) {
+> const Comments = ({ postId }) => {
 >   const [comments, setComments] = useState(null);
 >   const [loading, setLoading] = useState(true);
 >   useEffect(() => {
@@ -471,7 +471,7 @@ id: 04-side-effects-lifecycle
 > }
 >
 > // AFTER (React 19) — use() + Suspense
-> function Comments({ commentsPromise }) {
+> const Comments = ({ commentsPromise }) => {
 >   const comments = use(commentsPromise);
 >   return comments.map(c => <p key={c.id}>{c.text}</p>);
 > }
@@ -547,7 +547,7 @@ function useDocumentTitle(title: string) {
   }, [title]);
 }
 
-function App() {
+const App = () => {
   const [count, setCount] = useState(0);
   useDocumentTitle(`Count: ${count}`);
 
@@ -576,7 +576,7 @@ function useWindowSize() {
   return size;
 }
 
-function ResponsiveInfo() {
+const ResponsiveInfo = () => {
   const { width, height } = useWindowSize();
   return (
     <p>
@@ -633,7 +633,7 @@ function fetchQuote(): Promise<Quote> {
   return quotePromise;
 }
 
-function QuoteDisplay() {
+const QuoteDisplay = () => {
   const quote = use(fetchQuote());
   return (
     <blockquote>
@@ -643,7 +643,7 @@ function QuoteDisplay() {
   );
 }
 
-function App() {
+const App = () => {
   return (
     <Suspense fallback={<p>Loading quote...</p>}>
       <QuoteDisplay />
@@ -690,7 +690,7 @@ function loadTasks(): Task[] {
   }
 }
 
-function App() {
+const App = () => {
   // Lazy initialization — only parse localStorage on first render
   const [tasks, setTasks] = useState<Task[]>(() => {
     const loaded = loadTasks();
@@ -800,7 +800,7 @@ interface LoadApiTasksProps {
   onLoad: (tasks: Task[]) => void;
 }
 
-function LoadApiTasks({ onLoad }: LoadApiTasksProps) {
+const LoadApiTasks = ({ onLoad }: LoadApiTasksProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -848,7 +848,7 @@ import TaskCard from './TaskCard';
 const apiTasksPromise = fetch('/api/tasks')
   .then((r) => r.json()) as Promise<Task[]>;
 
-function ApiTaskListInner() {
+const ApiTaskListInner = () => {
   const tasks = use(apiTasksPromise);
 
   return (
@@ -866,7 +866,7 @@ function ApiTaskListInner() {
 }
 
 // Wrap with Suspense — the loading state is declarative
-function ApiTaskList() {
+const ApiTaskList = () => {
   return (
     <Suspense fallback={<p>Loading tasks from API...</p>}>
       <ApiTaskListInner />

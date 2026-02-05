@@ -46,11 +46,11 @@ Without custom hooks, you'd copy-paste the same `useState` + `useEffect` pattern
 **Critical mental model:** Each component that calls a custom hook gets its **own independent copy** of that hook's state. Hooks share *logic*, not *state*.
 
 ```tsx
-function ComponentA() {
+const ComponentA = () => {
   const width = useWindowWidth(); // ComponentA's own width state
 }
 
-function ComponentB() {
+const ComponentB = () => {
   const width = useWindowWidth(); // ComponentB's own SEPARATE width state
 }
 ```
@@ -68,7 +68,7 @@ These aren't guidelines — they're hard rules that React depends on. Break them
 
 ```tsx
 // ❌ WRONG — inside a condition
-function SearchResults({ query }) {
+const SearchResults = ({ query }) => {
   if (query === "") {
     return <p>Type something...</p>;
   }
@@ -80,7 +80,7 @@ function SearchResults({ query }) {
 }
 
 // ✅ RIGHT — hooks before any returns
-function SearchResults({ query }) {
+const SearchResults = ({ query }) => {
   const [results, setResults] = useState([]);
   
   if (query === "") {
@@ -171,7 +171,7 @@ function useOnlineStatus() {
 }
 
 // Usage
-function StatusBar() {
+const StatusBar = () => {
   const isOnline = useOnlineStatus();
   return <span>{isOnline ? "🟢 Online" : "🔴 Offline"}</span>;
 }
@@ -206,7 +206,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 }
 
 // Usage — works exactly like useState, but persists
-function Settings() {
+const Settings = () => {
   const [theme, setTheme] = useLocalStorage("theme", "light");
   const [fontSize, setFontSize] = useLocalStorage("fontSize", 16);
   // Values survive page reloads!
@@ -317,7 +317,7 @@ function useDebouncedValue<T>(value: T, delayMs: number = 300): T {
 }
 
 // Usage
-function TaskSearch() {
+const TaskSearch = () => {
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebouncedValue(query, 300);
 
@@ -431,7 +431,7 @@ function useMediaQuery(query: string): boolean {
 }
 
 // Usage
-function Layout() {
+const Layout = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -461,7 +461,7 @@ function usePrevious<T>(value: T): T | undefined {
 }
 
 // Usage
-function Counter() {
+const Counter = () => {
   const [count, setCount] = useState(0);
   const prevCount = usePrevious(count);
 
@@ -490,7 +490,7 @@ function useToggle(initial: boolean = false) {
 }
 
 // Usage
-function TaskItem({ task }: { task: Task }) {
+const TaskItem = ({ task }: { task: Task }) => {
   const { value: isEditing, setTrue: startEdit, setFalse: stopEdit } = useToggle();
 
   return isEditing 
@@ -654,7 +654,7 @@ Now update your main `App` component. Before:
 
 ```tsx
 // ❌ Before — everything tangled in the component
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState(() => {
     const stored = localStorage.getItem("tasks");
     return stored ? JSON.parse(stored) : [];
@@ -683,7 +683,7 @@ After:
 
 ```tsx
 // ✅ After — clean, readable, logic extracted
-function App() {
+const App = () => {
   const { filteredTasks, filter, setFilter, addTask, toggleTask, deleteTask, counts } = 
     useFilteredTasks();
   const { theme, toggleTheme } = useTheme();
@@ -755,7 +755,7 @@ function useAsyncAction<T>(asyncFn: () => Promise<T>) {
 }
 
 // Usage:
-function TaskList() {
+const TaskList = () => {
   const { execute: loadTasks, data: tasks, isLoading, error } = 
     useAsyncAction(() => fetch("/api/tasks").then(r => r.json()));
 
