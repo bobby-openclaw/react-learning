@@ -359,42 +359,15 @@ The full code follows the same patterns as the Layout — you have all the build
 
 ### Step 4: Style the TaskForm
 
-```tsx
-// Inside TaskForm — replace className strings with Tailwind utilities:
+Key patterns for form styling:
 
-<form onSubmit={handleSubmit(onValid)} noValidate className="space-y-4">
-  <div className="space-y-1.5">
-    <label htmlFor="title" className="text-sm font-medium text-gray-700">
-      Title <span className="text-red-500">*</span>
-    </label>
-    <input
-      id="title"
-      type="text"
-      placeholder="What needs to be done?"
-      className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm
-                focus:border-blue-500 focus:outline-none focus:ring-1
-                focus:ring-blue-500"
-      {...register("title")}
-    />
-    {errors.title && (
-      <p className="text-sm text-red-600">{errors.title.message}</p>
-    )}
-  </div>
+- **Labels:** `text-sm font-medium text-gray-700`
+- **Inputs:** `w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500`
+- **Error messages:** `text-sm text-red-600`
+- **Submit button:** `w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed`
+- **Form spacing:** `space-y-4` on the form, `space-y-1.5` on each field group
 
-  {/* Repeat pattern for other fields... */}
-
-  <button
-    type="submit"
-    disabled={isSubmitting}
-    className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium
-              text-white hover:bg-blue-700 focus:outline-none focus:ring-2
-              focus:ring-blue-500 focus:ring-offset-2
-              disabled:cursor-not-allowed disabled:opacity-50"
-  >
-    {isSubmitting ? "Saving..." : submitLabel}
-  </button>
-</form>
-```
+Apply this pattern to every field in your TaskForm — label, input, error message.
 
 ### Step 5: Responsive Sidebar
 
