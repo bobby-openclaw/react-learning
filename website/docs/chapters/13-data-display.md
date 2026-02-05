@@ -525,6 +525,88 @@ const TaskPage = () => {
 
 ---
 
+## 🤔 Table vs List vs Grid — When to Use Each
+
+You now have a DataTable, Tabs, Toasts, and Skeletons in your toolkit. But before reaching for that DataTable for everything, ask: **is a table actually the right choice?**
+
+### DataTable: Structured Data You Compare Across Rows
+
+Use a DataTable when:
+- Data has **multiple attributes** users want to compare (title, status, priority, date)
+- Users need to **sort, filter, or search** through the data
+- Rows are **independent items** of the same type (tasks, orders, users, invoices)
+- The data is **dense** — lots of items, users need to scan efficiently
+
+**Examples:** Task lists, admin dashboards, order histories, user management, log viewers.
+
+### Card Grid: Visual Content You Browse
+
+Use a card grid when:
+- Each item is **visually distinct** — images, previews, thumbnails
+- Users **browse and discover** rather than compare specific attributes
+- Items benefit from **more vertical space** per entry
+- The data is **less structured** — some items have images, some don't, descriptions vary in length
+
+**Examples:** Product catalogs, photo galleries, blog posts, team member profiles, app dashboards with stats.
+
+```tsx
+// Card grid: great for browsing visual content
+<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {projects.map((project) => (
+    <Card key={project.id}>
+      <CardHeader>
+        <img src={project.thumbnail} className="rounded-md" />
+        <CardTitle>{project.name}</CardTitle>
+      </CardHeader>
+      <CardContent>{project.description}</CardContent>
+    </Card>
+  ))}
+</div>
+```
+
+### Simple List: Sequential Items, No Comparison Needed
+
+Use a simple list (no table) when:
+- Items are **sequential** — order matters (newest first, chronological)
+- Users read items **one at a time**, not comparing across rows
+- Each item has **one primary piece of content** (a message, a notification, a log entry)
+- There's **no need to sort or filter** by multiple columns
+
+**Examples:** Chat messages, notification feeds, activity logs, changelog entries, comment threads.
+
+```tsx
+// Simple list: great for sequential, single-focus items
+<div className="space-y-2">
+  {notifications.map((n) => (
+    <div key={n.id} className="flex items-start gap-3 rounded-lg border p-3">
+      <span className="text-lg">{n.icon}</span>
+      <div>
+        <p className="text-sm font-medium">{n.title}</p>
+        <p className="text-xs text-muted-foreground">{n.time}</p>
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+### When Tabs Help vs When They Hide
+
+Tabs are powerful for organizing content into categories, but they have a hidden cost: **users can't see what's in the other tabs.** This matters more than you'd think.
+
+**Tabs work well when:**
+- Categories are **mutually exclusive** — viewing "Active" tasks means you don't need "Completed" visible
+- Users have a **clear mental model** of what's in each tab ("I know my completed tasks are in the Completed tab")
+- The number of tabs is **small** (3-5 max)
+
+**Tabs hurt when:**
+- Users need to **compare items across categories** — they'll be constantly switching tabs
+- The categories aren't obvious — users don't know which tab to check
+- There are too many tabs — if you need more than 5, consider a filter dropdown or sidebar navigation instead
+
+**Alternative to tabs:** A single list with a **filter bar**. This lets users see everything at once and narrow down with filters. For TaskFlow, we use tabs because task statuses are well-understood categories (All, Active, Completed) — but if you added more granular categories (by project, by assignee, by due date), a filter approach would scale better.
+
+---
+
 ## 🔨 Project Task: Build the TaskFlow Data Table
 
 Time to replace that basic task list with a proper data table. Here's the plan:

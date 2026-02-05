@@ -98,21 +98,11 @@ Nothing else. If you never use `text-red-500`, it's not in your CSS.
 
 ### 4. The Spacing Scale
 
-Tailwind's spacing system is based on a `0.25rem` (4px) unit scale:
+Tailwind's spacing system is based on a `0.25rem` (4px) unit scale. Each number = that many 4px units:
 
-| Class | Value | Pixels |
-|-------|-------|--------|
-| `p-0` | 0 | 0px |
-| `p-1` | 0.25rem | 4px |
-| `p-2` | 0.5rem | 8px |
-| `p-3` | 0.75rem | 12px |
-| `p-4` | 1rem | 16px |
-| `p-6` | 1.5rem | 24px |
-| `p-8` | 2rem | 32px |
-| `p-12` | 3rem | 48px |
-| `p-16` | 4rem | 64px |
+- `p-1` → 4px, `p-2` → 8px, `p-4` → 16px, `p-8` → 32px
 
-This same scale applies to `margin` (`m-`), `gap`, `width`, `height`, and more.
+The same scale applies to `margin` (`m-`), `gap`, `width`, `height`, and more. You'll internalize the common ones (`p-2`, `p-4`, `p-6`, `p-8`) quickly — for the full list, see the [Tailwind spacing docs](https://tailwindcss.com/docs/padding).
 
 **Arbitrary values:** Need a specific value not in the scale? Use brackets: `p-[13px]`, `w-[calc(100%-2rem)]`.
 
@@ -120,14 +110,9 @@ This same scale applies to `margin` (`m-`), `gap`, `width`, `height`, and more.
 
 Tailwind is **mobile-first**. Unprefixed utilities apply to all screen sizes. Breakpoint prefixes apply at that size *and up*:
 
-| Prefix | Min-width | Common device |
-|--------|-----------|---------------|
-| (none) | 0px | Mobile |
-| `sm:` | 640px | Large phone / small tablet |
-| `md:` | 768px | Tablet |
-| `lg:` | 1024px | Laptop |
-| `xl:` | 1280px | Desktop |
-| `2xl:` | 1536px | Large desktop |
+- `sm:` (640px) → `md:` (768px) → `lg:` (1024px) → `xl:` (1280px) → `2xl:` (1536px)
+
+Full breakpoint reference: [Tailwind responsive docs](https://tailwindcss.com/docs/responsive-design).
 
 ```tsx
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -203,73 +188,28 @@ Replace the contents of your `src/index.css`:
 
 That's it. No `tailwind.config.js` needed for basic usage (v4 auto-detects content).
 
-### Core Utility Classes
+### Common Patterns at a Glance
+
+You'll pick up utility names fast — they map directly to CSS properties. Here are the categories you'll use most: **typography** (`text-sm`, `font-bold`, `text-gray-500`), **spacing** (`p-4`, `m-2`, `space-y-4`), **borders** (`border`, `rounded-lg`, `shadow-sm`), and **colors** (`bg-blue-500`, `text-white`). Browse the full list at [tailwindcss.com/docs](https://tailwindcss.com/docs).
+
+### Flexbox & Grid
 
 ```tsx
-{/* Typography */}
-<h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-<p className="text-sm text-gray-500 leading-relaxed">Welcome back!</p>
-
-{/* Spacing */}
-<div className="p-4 m-2 space-y-4">  {/* padding, margin, vertical spacing */}
-  <p>First item</p>
-  <p>Second item (has margin-top from space-y-4)</p>
-</div>
-
-{/* Borders & Shadows */}
-<div className="border border-gray-200 rounded-lg shadow-sm">
-  Contained card
-</div>
-
-{/* Colors */}
-<span className="text-red-600 bg-red-50 px-2 py-1 rounded">High</span>
-<span className="text-yellow-600 bg-yellow-50 px-2 py-1 rounded">Medium</span>
-<span className="text-green-600 bg-green-50 px-2 py-1 rounded">Low</span>
-```
-
-### Flexbox Layout
-
-```tsx
-{/* Horizontal bar with space between */}
+{/* Flexbox: horizontal bar with space between */}
 <div className="flex items-center justify-between p-4">
   <h2 className="text-lg font-semibold">Tasks</h2>
-  <button className="px-3 py-1.5 bg-blue-500 text-white rounded-md">
-    + Add Task
-  </button>
+  <button className="px-3 py-1.5 bg-blue-500 text-white rounded-md">+ Add Task</button>
 </div>
 
-{/* Centered content */}
-<div className="flex items-center justify-center min-h-screen">
-  <p>Perfectly centered!</p>
-</div>
-
-{/* Column layout with gap */}
-<div className="flex flex-col gap-3">
-  <TaskCard />
-  <TaskCard />
-  <TaskCard />
+{/* Grid: responsive columns */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div className="bg-white p-4 rounded-lg shadow-sm">Card 1</div>
+  <div className="bg-white p-4 rounded-lg shadow-sm">Card 2</div>
+  <div className="bg-white p-4 rounded-lg shadow-sm">Card 3</div>
 </div>
 ```
 
-### Grid Layout
-
-```tsx
-{/* Responsive grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
-  <div className="bg-white p-4 rounded-lg shadow-sm">
-    <h3 className="text-sm font-medium text-gray-500">To Do</h3>
-    <p className="text-2xl font-bold">12</p>
-  </div>
-  <div className="bg-white p-4 rounded-lg shadow-sm">
-    <h3 className="text-sm font-medium text-gray-500">In Progress</h3>
-    <p className="text-2xl font-bold">5</p>
-  </div>
-  <div className="bg-white p-4 rounded-lg shadow-sm">
-    <h3 className="text-sm font-medium text-gray-500">Done</h3>
-    <p className="text-2xl font-bold">28</p>
-  </div>
-</div>
-```
+Flexbox docs: [tailwindcss.com/docs/flex](https://tailwindcss.com/docs/flex) · Grid docs: [tailwindcss.com/docs/grid-template-columns](https://tailwindcss.com/docs/grid-template-columns)
 
 ### A Complete Card Component in Tailwind
 
@@ -408,92 +348,14 @@ const Layout = () => {
 
 ### Step 3: Rebuild the Dashboard
 
-**`src/pages/Dashboard.tsx`**
-```tsx
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { TaskContext } from "../context/TaskContext";
-import QuickAdd from "../components/QuickAdd";
+Apply the same Tailwind patterns to `src/pages/Dashboard.tsx`:
 
-const Dashboard = () => {
-  const { tasks } = useContext(TaskContext);
+- **Summary cards:** Use `grid grid-cols-1 gap-4 sm:grid-cols-3` for a responsive stats row
+- **Task list:** `space-y-2` for vertical spacing, `hover:shadow-md` + `transition-shadow` on each Link
+- **Status badges:** Dynamic classes with a `statusStyles` map (same pattern as `priorityStyles` in the card example above)
+- **Empty state:** `py-8 text-center text-gray-400`
 
-  const counts = {
-    todo: tasks.filter((t) => t.status === "todo").length,
-    inProgress: tasks.filter((t) => t.status === "in-progress").length,
-    done: tasks.filter((t) => t.status === "done").length,
-  };
-
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-sm text-gray-500">{tasks.length} total tasks</p>
-      </div>
-
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <p className="text-sm font-medium text-gray-500">To Do</p>
-          <p className="mt-1 text-3xl font-bold text-gray-900">
-            {counts.todo}
-          </p>
-        </div>
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <p className="text-sm font-medium text-gray-500">In Progress</p>
-          <p className="mt-1 text-3xl font-bold text-blue-600">
-            {counts.inProgress}
-          </p>
-        </div>
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <p className="text-sm font-medium text-gray-500">Done</p>
-          <p className="mt-1 text-3xl font-bold text-green-600">
-            {counts.done}
-          </p>
-        </div>
-      </div>
-
-      {/* Quick Add */}
-      <QuickAdd />
-
-      {/* Task List */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-semibold text-gray-900">All Tasks</h2>
-        {tasks.length === 0 ? (
-          <p className="py-8 text-center text-gray-400">
-            No tasks yet. Add one above!
-          </p>
-        ) : (
-          <div className="space-y-2">
-            {tasks.map((task) => (
-              <Link
-                key={task.id}
-                to={`/task/${task.id}`}
-                className="flex items-center justify-between rounded-lg border
-                          border-gray-200 bg-white p-4 transition-shadow
-                          hover:shadow-md"
-              >
-                <span className="font-medium text-gray-900">{task.title}</span>
-                <span
-                  className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                    task.status === "done"
-                      ? "bg-green-50 text-green-700"
-                      : task.status === "in-progress"
-                      ? "bg-blue-50 text-blue-700"
-                      : "bg-gray-100 text-gray-600"
-                  }`}
-                >
-                  {task.status}
-                </span>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-```
+The full code follows the same patterns as the Layout — you have all the building blocks now.
 
 ### Step 4: Style the TaskForm
 
