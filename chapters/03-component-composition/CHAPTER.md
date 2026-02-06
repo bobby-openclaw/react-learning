@@ -46,31 +46,21 @@ Don't create a component for every `<div>`. Premature abstraction is real:
 
 Props drilling is when you pass data through multiple layers of components to reach a deeply nested one:
 
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+graph TD
+    App["**App**\nstate: tasks, onToggle, onDelete"]
+    Main["**Main** ⚠️\nreceives props, uses NONE\n(just passes through!)"]
+    TS["**TaskSection** ⚠️\nreceives props, uses NONE\n(just passes through!)"]
+    TL["**TaskList**\nreceives props\nuses: tasks (maps over them)"]
+    TC["**TaskCard** ✅\nreceives: task, onToggle, onDelete\nuses: ALL"]
+    App -- "tasks, onToggle, onDelete" --> Main
+    Main -- "tasks, onToggle, onDelete" --> TS
+    TS -- "tasks, onToggle, onDelete" --> TL
+    TL -- "task, onToggle, onDelete" --> TC
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                            PROPS DRILLING PROBLEM                            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   App                                                                        │
-│   ├── state: { tasks, onToggle, onDelete }                                   │
-│   │                                                                          │
-│   └── Main ◄─────────────────── receives: tasks, onToggle, onDelete         │
-│       │                         uses: NONE (just passes through!)            │
-│       │                                                                      │
-│       └── TaskSection ◄──────── receives: tasks, onToggle, onDelete         │
-│           │                     uses: NONE (just passes through!)            │
-│           │                                                                  │
-│           └── TaskList ◄─────── receives: tasks, onToggle, onDelete         │
-│               │                 uses: tasks (maps over them)                 │
-│               │                                                              │
-│               └── TaskCard ◄─── receives: task, onToggle, onDelete          │
-│                                 uses: ALL ✓                                  │
-│                                                                              │
-│   Main and TaskSection don't use the props — they just forward them.        │
-│   Every new prop = edit 4 files. This is the "drilling" problem.            │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+> Main and TaskSection don't use the props — they just forward them. Every new prop = edit 4 files. This is the "drilling" problem.
 
 Every intermediate component (`Main`, `TaskSection`) must accept and pass down props it doesn't use itself.
 

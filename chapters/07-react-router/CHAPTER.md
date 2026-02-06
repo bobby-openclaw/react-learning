@@ -65,23 +65,17 @@ React Router uses a component-based approach. Here's the hierarchy:
 
 Here's how URLs map to components:
 
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+flowchart LR
+    U1["/"] --> M1["'/' index"] --> R1["Layout + Dashboard"]
+    U2["/settings"] --> M2["'/settings'"] --> R2["Layout + Settings"]
+    U3["/task/abc-123"] --> M3["'/task/:id'"] --> R3["Layout + TaskDetail"]
+    U4["/task/xyz-789"] --> M3
+    U5["/anything-else"] --> M5["'*'"] --> R5["NotFound"]
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           URL → COMPONENT MAPPING                            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   URL                         MATCHES                RENDERS                 │
-│   ───                         ───────                ───────                 │
-│   /                     ───▶  "/" (index)      ───▶  <Layout> + <Dashboard>  │
-│   /settings             ───▶  "/settings"      ───▶  <Layout> + <Settings>   │
-│   /task/abc-123         ───▶  "/task/:id"      ───▶  <Layout> + <TaskDetail> │
-│   /task/xyz-789         ───▶  "/task/:id"      ───▶  <Layout> + <TaskDetail> │
-│   /anything-else        ───▶  "*"              ───▶  <NotFound>              │
-│                                                                              │
-│   :id is a "dynamic segment" — matches any value, accessible via useParams() │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+> `:id` is a "dynamic segment" — matches any value, accessible via `useParams()`
 
 ### 4. Nested Routes & Layouts
 

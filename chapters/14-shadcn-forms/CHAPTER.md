@@ -756,6 +756,82 @@ const TaskForm = () => {
 
 ---
 
+## 🤔 Choosing the Right Input Component
+
+You've seen Input, Textarea, Select, Combobox, DatePicker, Switch, and Checkbox. They all collect user input, but picking the wrong one creates friction. Here's how to choose.
+
+### Input vs Textarea
+
+Seems obvious? The tricky case is the **in-between**: content that's *usually* short but *sometimes* long.
+
+- **Input** — single-line, predictable length: names, email addresses, URLs, search queries
+- **Textarea** — multi-line, variable length: descriptions, comments, notes, messages
+- **Auto-growing Textarea** — the best of both worlds: starts compact like an Input, grows as the user types. Use this for fields like "Add a comment" where most entries are one line but some are paragraphs
+
+**The mistake to avoid:** Using `<Input>` for descriptions. A user types a long task description, hits what they think should be a line break, and submits the form instead (because Enter submits in inputs). Use Textarea for anything that *might* be multi-line.
+
+### Select vs Combobox
+
+This one has a clear heuristic:
+
+| | Select | Combobox |
+|---|---|---|
+| **Number of options** | < 10 | > 10 (or dynamic) |
+| **User knows what they want?** | Yes (picking from known options) | Maybe (needs to search) |
+| **Options are fixed?** | Yes | Can be dynamic/API-driven |
+| **Mobile experience** | Great (native-like) | Good (but heavier) |
+
+**Select** (< 10 fixed options): Priority levels (low/medium/high), task status (todo/in-progress/done), categories. Users can see all options at a glance. The component is lightweight.
+
+**Combobox** (> 10 or searchable): Assignee from a team of 50 people, timezone selection, country picker. Users need to type to find their option. The Command component underneath gives them fuzzy search for free.
+
+**The gray area:** 7-15 options. At this point, ask: "Will users know the exact option they want?" If yes (like US states — people know their state), Select is fine. If no (like choosing a Slack channel from 12 options), Combobox helps.
+
+### DatePicker vs Native `<input type="date">`
+
+The native date input (`<input type="date">`) is... fine. It works, it's accessible, it's zero bytes of JavaScript. So when do you need shadcn's Calendar + Popover DatePicker?
+
+**Use native `<input type="date">` when:**
+- You just need a date, no special constraints
+- Consistency with the OS is a plus (users already know their OS's date picker)
+- Bundle size matters and you don't need the Calendar component elsewhere
+
+**Use shadcn DatePicker (Calendar + Popover) when:**
+- You need to **disable specific dates** (no weekends, no past dates, no holidays)
+- You want to show **date ranges** or let users select multiple dates
+- You need a **consistent look** across all browsers and OS (native pickers vary wildly)
+- You're already using the Calendar component elsewhere in your app
+- You want to show **additional context** on dates (e.g., which dates have tasks)
+
+For TaskFlow, we use the shadcn DatePicker because we disable past dates and want a consistent cross-browser look. But if you're building a simple contact form with a birthday field, native `<input type="date">` is perfectly fine.
+
+### Checkbox vs Switch
+
+Both represent boolean state. Both toggle on/off. But they signal different things to users:
+
+**Switch** → a **setting or preference** that takes effect immediately
+- "Enable dark mode" (toggles right now)
+- "Mark as urgent" (changes state instantly)
+- "Email notifications" (on/off preference)
+
+**Checkbox** → an **agreement or multi-select item** that's part of a larger submission
+- "I agree to the terms" (submitted with a form)
+- Select tags: ☑ Work ☑ Personal ☐ Health (multi-select in a form)
+- "Remember me" (submitted with login)
+
+**The key difference is timing.** Switches feel like light switches — flip and it happens. Checkboxes feel like filling out a form — check the boxes, then submit. If you use a Switch for "I agree to terms," users will expect something to happen immediately when they flip it. If you use a Checkbox for "Dark mode," users will look for a Save button that doesn't exist.
+
+```tsx
+// ✅ Switch: takes effect immediately
+<Switch checked={isDarkMode} onCheckedChange={toggleDarkMode} />
+
+// ✅ Checkbox: part of form submission
+<Checkbox checked={agreedToTerms} onCheckedChange={setAgreedToTerms} />
+<Button type="submit">Create Account</Button>
+```
+
+---
+
 ## 🔨 Project Task: Rebuild TaskFlow's Forms
 
 ### Step 1: Install Components

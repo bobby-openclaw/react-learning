@@ -701,6 +701,118 @@ useEffect(() => {
 
 ---
 
+## 🤔 Design Decisions That Matter
+
+Theming and layout are full of "it depends" decisions. Here's guidance on the ones that trip people up most.
+
+### When Dark Mode Is Enough vs When You Need Custom Themes
+
+**Just dark mode** is the right call for most apps. It covers the primary use case (reducing eye strain, user preference) with minimal complexity. You need two sets of CSS variables, a toggle, and you're done.
+
+**Custom themes** make sense when:
+- **Branding matters** — your app is white-labeled or used by different organizations that want their colors
+- **It's a creative/personal tool** — note-taking apps, code editors, social profiles where self-expression is part of the product
+- **Accessibility requires it** — some users need high-contrast themes beyond what light/dark provides
+
+**The cost of custom themes:** Every new theme is another set of 20+ CSS variables you need to maintain and test for contrast. Every UI change needs testing across all themes. If you have 4 themes, you have 4x the visual QA. Don't add themes for novelty — add them when users genuinely need the flexibility.
+
+For TaskFlow, we added Ocean and Sunset themes because it's a *learning exercise* and it demonstrates the system's power. In a production app, you'd likely ship with just light + dark and add custom themes only if users asked for them.
+
+### Sidebar vs Top Navigation
+
+This isn't just an aesthetic choice — it has real UX implications.
+
+**Sidebar navigation works when:**
+- You have **5+ top-level sections** (the vertical space accommodates them)
+- Users spend time **in one section** and switch occasionally
+- You want to show **nested navigation** (sections with sub-items)
+- Your content is **wide** (tables, dashboards, editors)
+
+**Top navigation works when:**
+- You have **3-5 sections** (fits horizontally)
+- Your app is **content-focused** (blogs, docs, landing pages)
+- You want **maximum content width**
+- The navigation is **flat** (no nesting)
+
+**The mobile question:** This is where the decision gets interesting. Top nav on desktop can become a hamburger menu or bottom tab bar on mobile. Sidebars on desktop typically become a Sheet (slide-in panel) on mobile — which is exactly what we built in Chapter 12.
+
+```
+Desktop sidebar     → Mobile Sheet (slide from left)
+Desktop top nav     → Mobile hamburger OR bottom tabs
+```
+
+**Bottom tab bars** (like in iOS apps) are arguably the best mobile navigation pattern — they're always visible, reachable by thumb, and show where you are. But they're less common in web apps. If your app is heavily mobile-used, consider it.
+
+### When to Use shadcn's Built-in Responsive Patterns vs Custom Breakpoints
+
+shadcn components are responsive by default — Dialogs center themselves, Sheets slide from the right edge, Sidebars collapse. But your *layout* needs intentional breakpoint decisions.
+
+**Use Tailwind's default breakpoints** (`sm`, `md`, `lg`, `xl`) for most cases. They're well-tested and cover the standard device landscape. Fighting the defaults creates maintenance burden with no real benefit.
+
+**Add custom breakpoints only when:**
+- Your design has a **specific width** where the layout breaks awkwardly between standard breakpoints
+- You're building for **unusual form factors** (TV screens, kiosk displays, watch apps)
+- You have **content-specific needs** (e.g., a three-column layout that only works above 1100px, which falls between `lg` and `xl`)
+
+```js
+// Usually unnecessary — the defaults are fine
+// tailwind.config.ts
+theme: {
+  screens: {
+    'xs': '475px',  // ← only if you genuinely need this
+    // sm, md, lg, xl, 2xl are already defined
+  }
+}
+```
+
+### The "Polish" Checklist
+
+These are the details that separate a dev project from a shippable product. Before calling any page "done," run through this list:
+
+**🔵 Focus rings:** Can you Tab through every interactive element and see where focus is? shadcn handles this for its components, but verify your custom elements too. Focus rings should be visible in *both* light and dark themes.
+
+**⏳ Loading states:** Every button that triggers an async action should show a loading state. Every page that fetches data should show a skeleton or spinner. Users should never stare at a blank screen wondering "did it work?"
+
+```tsx
+<Button disabled={isPending}>
+  {isPending ? (
+    <>
+      <span className="mr-2 animate-spin">⏳</span>
+      Saving...
+    </>
+  ) : (
+    "Save Task"
+  )}
+</Button>
+```
+
+**❌ Error states:** What happens when the API fails? When validation fails? When the network is down? Every form needs error messages. Every data fetch needs an error fallback. Don't just `console.error` — show the user what went wrong and what they can do about it.
+
+**📭 Empty states:** What does the page look like with zero items? An empty DataTable should say "No tasks yet — create one!" with a call to action, not just show an empty grid. Empty states are an opportunity to guide users.
+
+```tsx
+{tasks.length === 0 ? (
+  <Card className="py-12 text-center">
+    <CardContent>
+      <p className="text-muted-foreground mb-4">No tasks yet!</p>
+      <Button onClick={openCreateDialog}>Create your first task</Button>
+    </CardContent>
+  </Card>
+) : (
+  <DataTable columns={columns} data={tasks} />
+)}
+```
+
+**✨ Transitions:** Abrupt state changes feel jarring. Add subtle transitions for:
+- Theme switching (background-color transition, ~300ms)
+- Page navigation (fade or slide, ~200ms)
+- Element appearance/disappearance (opacity + transform, ~150ms)
+- Hover states (already handled by Tailwind's `transition-colors`)
+
+But respect `prefers-reduced-motion` — some users need these disabled for accessibility or health reasons. shadcn's components already include this check, but add it to your custom animations too.
+
+---
+
 ## 🔨 Project Task: Polish TaskFlow
 
 ### Step 1: Install Sidebar Component

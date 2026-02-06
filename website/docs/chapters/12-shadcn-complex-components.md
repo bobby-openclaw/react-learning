@@ -539,26 +539,22 @@ You've just learned six different overlay components: Dialog, AlertDialog, Dropd
 
 Here's a decision tree:
 
-```
-User needs to interact with floating content?
-│
-├── Is it a destructive/irreversible action?
-│   └── YES → AlertDialog (forces explicit confirm/cancel, can't dismiss by clicking outside)
-│
-├── Does it contain a form or complex content?
-│   └── YES → Dialog (modal, blocks background, focus-trapped)
-│
-├── Is it a list of actions for a specific item?
-│   └── YES → DropdownMenu (contextual, keyboard-navigable, auto-dismisses)
-│
-├── Is it navigation or a large panel of content?
-│   └── YES → Sheet (slides in from edge, great for mobile nav or detail panels)
-│
-├── Does it need interactive content anchored to an element?
-│   └── YES → Popover (click-triggered, stays until dismissed, can contain buttons/forms)
-│
-└── Is it just a short explanatory hint?
-    └── YES → Tooltip (hover/focus only, no interactive content, one line of text)
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+flowchart TD
+    Q["User needs to interact\nwith floating content?"]
+    Q --> D1{"Destructive/irreversible\naction?"}
+    Q --> D2{"Form or complex\ncontent?"}
+    Q --> D3{"List of actions\nfor a specific item?"}
+    Q --> D4{"Navigation or\nlarge panel?"}
+    Q --> D5{"Interactive content\nanchored to element?"}
+    Q --> D6{"Short explanatory\nhint?"}
+    D1 -- YES --> A1["**AlertDialog**\nForces confirm/cancel\nCan't dismiss by clicking outside"]
+    D2 -- YES --> A2["**Dialog**\nModal, blocks background\nFocus-trapped"]
+    D3 -- YES --> A3["**DropdownMenu**\nContextual, keyboard-navigable\nAuto-dismisses"]
+    D4 -- YES --> A4["**Sheet**\nSlides from edge\nGreat for mobile nav"]
+    D5 -- YES --> A5["**Popover**\nClick-triggered\nStays until dismissed"]
+    D6 -- YES --> A6["**Tooltip**\nHover/focus only\nNo interactive content"]
 ```
 
 ### Real-World Examples

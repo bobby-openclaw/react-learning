@@ -32,25 +32,14 @@ When you call `setValue(newValue)`:
 2. Schedules a re-render of this component
 3. On re-render, `useState` returns the new value
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        THE STATE UPDATE CYCLE                            │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│    ┌─────────────┐          ┌─────────────┐          ┌─────────────┐   │
-│    │   RENDER    │          │    EVENT    │          │   RENDER    │   │
-│    │   #1        │          │             │          │   #2        │   │
-│    │             │          │             │          │             │   │
-│    │ count = 0   │   ───▶   │setCount(1)  │   ───▶   │ count = 1   │   │
-│    │             │  click   │             │  react   │             │   │
-│    │ <button>    │          │ stores new  │ re-runs  │ <button>    │   │
-│    │  Count: 0   │          │   value     │component │  Count: 1   │   │
-│    └─────────────┘          └─────────────┘          └─────────────┘   │
-│          │                                                  │           │
-│          │                                                  │           │
-│          └────────────────────────────────────────────────▶─┘           │
-│                           cycle continues...                             │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+flowchart LR
+    R1["**RENDER #1**\n\ncount = 0\n‹button›\nCount: 0"]
+    E["**EVENT**\n\nsetCount(1)\nstores new value"]
+    R2["**RENDER #2**\n\ncount = 1\n‹button›\nCount: 1"]
+    R1 -- "click" --> E -- "react re-runs\ncomponent" --> R2
+    R2 -. "cycle continues..." .-> R1
 ```
 
 **Think of it like a photograph vs. a video.** Each render is a "snapshot" — a photograph of your UI at a moment in time. `useState` is the dial that advances to the next frame.

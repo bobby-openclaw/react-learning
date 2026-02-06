@@ -527,6 +527,63 @@ import {
 
 ---
 
+## 🤔 Choosing the Right Overlay Component
+
+You've just learned six different overlay components: Dialog, AlertDialog, DropdownMenu, Sheet, Popover, and Tooltip. They all float above the page. So how do you pick the right one?
+
+Here's a decision tree:
+
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+flowchart TD
+    Q["User needs to interact\nwith floating content?"]
+    Q --> D1{"Destructive/irreversible\naction?"}
+    Q --> D2{"Form or complex\ncontent?"}
+    Q --> D3{"List of actions\nfor a specific item?"}
+    Q --> D4{"Navigation or\nlarge panel?"}
+    Q --> D5{"Interactive content\nanchored to element?"}
+    Q --> D6{"Short explanatory\nhint?"}
+    D1 -- YES --> A1["**AlertDialog**\nForces confirm/cancel\nCan't dismiss by clicking outside"]
+    D2 -- YES --> A2["**Dialog**\nModal, blocks background\nFocus-trapped"]
+    D3 -- YES --> A3["**DropdownMenu**\nContextual, keyboard-navigable\nAuto-dismisses"]
+    D4 -- YES --> A4["**Sheet**\nSlides from edge\nGreat for mobile nav"]
+    D5 -- YES --> A5["**Popover**\nClick-triggered\nStays until dismissed"]
+    D6 -- YES --> A6["**Tooltip**\nHover/focus only\nNo interactive content"]
+```
+
+### Real-World Examples
+
+Think about apps you use every day — they've already solved these decisions:
+
+- **Instagram:** Sheet for comments panel (slides up from bottom), Dialog for post creation (complex form), AlertDialog for "Delete account?" (irreversible)
+- **GitHub:** DropdownMenu for the "..." actions on a PR, Popover for the branch selector (interactive search), Tooltip for icon buttons ("Copy SHA")
+- **Slack:** Dialog for message editing, Sheet for thread panel, DropdownMenu for message actions, Tooltip for reaction emoji names
+- **VS Code:** Command Palette (Command — which is basically a Dialog + search), context menus (DropdownMenu), hover info (Tooltip)
+
+### The Key Distinctions
+
+**Dialog vs Sheet:** Both are large overlays. Dialog is centered and feels like an interruption ("stop and deal with this"). Sheet slides in from the side and feels like an extension of the page ("here's more detail"). On mobile, Sheets work better for navigation because they feel natural — users are trained to swipe panels.
+
+**Dialog vs AlertDialog:** AlertDialog is a *subset* of Dialog with one critical difference: it **cannot be dismissed by clicking outside or pressing Escape**. The user MUST click one of the action buttons. This is intentional — you don't want someone accidentally closing a "Delete all data?" confirmation by tapping the background.
+
+**Popover vs Tooltip:** Popovers are triggered by click and can contain interactive content (buttons, links, forms). Tooltips are triggered by hover/focus and should only contain plain text. If users need to *interact* with the floating content, it's a Popover. If they just need to *read* it, it's a Tooltip.
+
+**Popover vs Dialog:** Popovers are *anchored* to a trigger element and non-modal (the background is still interactive). Dialogs are *centered* and modal (background is blocked). Use Popover for contextual info related to a specific element. Use Dialog when the task requires full attention.
+
+**DropdownMenu vs Popover:** Both are click-triggered and anchored. DropdownMenu is specifically for a *list of actions* — it has built-in keyboard navigation (arrow keys), type-ahead search, and auto-dismisses after selection. Popover is for arbitrary content. If it's a menu, use DropdownMenu.
+
+### Common Mistakes
+
+1. **Using Dialog when you need AlertDialog** — "Are you sure you want to delete?" should be AlertDialog. Users WILL accidentally click outside and lose the confirmation.
+
+2. **Using Tooltip for important information** — Tooltips are invisible on touch devices (no hover). If the info matters, use a Popover or just show it inline.
+
+3. **Using Dialog for everything** — Not every interaction needs a modal. Quick actions belong in DropdownMenus. Simple settings belong in Popovers. Reserve Dialog for complex, multi-field interactions.
+
+4. **Nesting modals** — Opening a Dialog from inside a Dialog is almost always a UX smell. If you need to confirm an action inside a Dialog, use AlertDialog (it's designed for this). Otherwise, redesign the flow.
+
+---
+
 ## 🔨 Project Task: Make TaskFlow Interactive
 
 ### Step 1: Install All Components

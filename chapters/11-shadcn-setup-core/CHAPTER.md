@@ -357,6 +357,88 @@ Now use it:
 
 ---
 
+## 🤔 When to Use Which Core Component
+
+You now know *how* to use Button, Card, Badge, and Input. But knowing *when* to reach for each one — and when NOT to — is what separates a developer who knows an API from one who builds good UIs.
+
+### Button vs Link Styled as Button
+
+This trips up everyone at some point. The rule is simple but important:
+
+- **`<Button>`** — triggers an *action* (submit form, delete item, toggle state)
+- **`<Button asChild><Link to="...">`** — *navigates* somewhere but needs to *look* like a button
+
+Why does this matter? **Accessibility.** Screen readers announce buttons as "button" and links as "link." If a blind user hears "Delete, link" they'll be confused — deletion is an action, not navigation. Conversely, "Go to Settings, button" is misleading when it actually navigates.
+
+```tsx
+// ✅ Action → use Button
+<Button onClick={handleDelete} variant="destructive">Delete</Button>
+
+// ✅ Navigation that looks like a button → use Button + asChild + Link
+<Button asChild variant="outline">
+  <Link to="/settings">Go to Settings</Link>
+</Button>
+
+// ❌ Don't do this — navigation disguised as an action
+<Button onClick={() => navigate("/settings")}>Go to Settings</Button>
+// This breaks: right-click → "Open in new tab", browser back/forward, 
+// and screen readers can't tell it's navigation
+```
+
+### Card vs Plain Div with Styling
+
+Reach for `<Card>` when your content has **structure** — a clear header, body, and optionally a footer. If you're just grouping some elements visually, a `<div>` with a border and padding is fine.
+
+| Use Card when... | Use a styled div when... |
+|---|---|
+| Content has a title + body + actions | Just grouping related elements |
+| It's a distinct "unit" (task, stat, profile) | It's a section of a larger page |
+| Users might scan multiple cards | There's only one of this element |
+| You want the Card's semantic structure | You just need a visual container |
+
+**The litmus test:** If you'd only use `<CardContent>` and skip Header/Footer/Title, you probably don't need a Card — a `<div className="rounded-lg border p-4">` is simpler and communicates the same thing.
+
+### Badge vs Colored Text
+
+Use `<Badge>` when the label represents a **category, status, or tag** — something that has discrete values and meaning. Use plain colored text when you're just emphasizing a word.
+
+```tsx
+// ✅ Badge: this is a status with a defined set of values
+<Badge variant="destructive">Overdue</Badge>
+
+// ✅ Colored text: this is just emphasis, not a category
+<span className="text-red-500">3 tasks need attention</span>
+
+// ❌ Over-badging: not everything needs to be a badge
+<Badge>John</Badge> assigned to <Badge>Project Alpha</Badge> on <Badge>Monday</Badge>
+// This is visual noise. Badges lose meaning when everything is one.
+```
+
+### Input vs Textarea
+
+This seems obvious, but the in-between case catches people:
+
+- **`<Input>`** — single-line, short values (names, emails, search queries)
+- **`<Textarea>`** — multi-line, longer content (descriptions, comments, notes)
+- **Auto-growing textarea** — when you want the *feel* of an Input but need to handle overflow gracefully (think: Slack's message box, tweet composer)
+
+```tsx
+// The in-between: starts as one line, grows as needed
+<Textarea
+  className="min-h-[40px] resize-none overflow-hidden"
+  onInput={(e) => {
+    const target = e.target as HTMLTextAreaElement;
+    target.style.height = "auto";
+    target.style.height = `${target.scrollHeight}px`;
+  }}
+  placeholder="Add a comment..."
+/>
+```
+
+**Rule of thumb:** If the expected input is under ~80 characters, use Input. If it *might* be multiple lines, use Textarea (even if it usually isn't). Users hate discovering they can't press Enter for a new line.
+
+---
+
 ## 🔨 Project Task: Upgrade TaskFlow with shadcn/ui
 
 ### Step 1: Initialize shadcn/ui

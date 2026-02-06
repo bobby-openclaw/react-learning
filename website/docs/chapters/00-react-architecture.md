@@ -223,23 +223,14 @@ This is called **reconciliation** or "diffing." React uses clever heuristics:
 
 React applies **only the calculated changes** to the real DOM:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         THE REACT RENDER CYCLE                               │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌──────────┐    ┌────────────────┐    ┌──────────────┐    ┌────────────┐ │
-│   │ TRIGGER  │───▶│     RENDER     │───▶│    DIFF      │───▶│   COMMIT   │ │
-│   └──────────┘    └────────────────┘    └──────────────┘    └────────────┘ │
-│        │                  │                    │                   │        │
-│        │                  │                    │                   │        │
-│   • setState()     • Call component     • Compare old        • Apply only   │
-│   • Initial load     functions            vs new VDOM          changes to   │
-│   • Parent          • Build new VDOM    • Find minimum          real DOM    │
-│     re-render       • (JS objects,        changes             • Browser     │
-│                       NOT DOM)                                  repaints    │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+flowchart LR
+    T["**TRIGGER**\n\n• setState()\n• Initial load\n• Parent re-render"]
+    R["**RENDER**\n\n• Call component functions\n• Build new VDOM\n• (JS objects, NOT DOM)"]
+    D["**DIFF**\n\n• Compare old vs new VDOM\n• Find minimum changes"]
+    C["**COMMIT**\n\n• Apply only changes to real DOM\n• Browser repaints"]
+    T --> R --> D --> C
 ```
 
 It does NOT re-create the entire DOM. That's the performance win.

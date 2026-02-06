@@ -36,31 +36,39 @@ Context is React's built-in dependency injection. It has three parts:
 2. **Provide** — wrap a subtree and supply the actual value
 3. **Consume** — any descendant reads the value directly
 
-```
-┌───────────────────────────────────────────────────────────────────────────┐
-│           PROPS DRILLING                    vs           CONTEXT          │
-├───────────────────────────────────────────────────────────────────────────┤
-│                                                                           │
-│        App (theme)                              App                       │
-│            │                                      │                       │
-│     ┌──────┴──────┐                        ┌──────┴──────┐               │
-│     │ theme prop  │                        │ <ThemeContext>               │
-│     ▼             ▼                        │   value="dark"               │
-│  Layout ──────▶ Sidebar                    ▼             ▼               │
-│     │             │                     Layout        Sidebar            │
-│ theme prop    theme prop                   │             │               │
-│     ▼             ▼                        │             │               │
-│  Header        Nav                      Header         Nav               │
-│     │                                      │             │               │
-│ theme prop                          ┌──────┘             └──────┐       │
-│     ▼                               ▼                           ▼       │
-│   Logo                            Logo ◀───────────────────▶ MenuItem    │
-│                                use(ThemeContext)          use(ThemeContext)
-│                                      │                           │       │
-│  Every component                     └───── "teleports" ─────────┘       │
-│  passes theme down                         directly to consumers         │
-│                                                                           │
-└───────────────────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+graph TD
+    subgraph drilling ["Props Drilling ❌"]
+        A1["App (theme)"]
+        A2[Layout]
+        A3[Sidebar]
+        A4[Header]
+        A5[Nav]
+        A6[Logo]
+        A1 -- "theme prop" --> A2
+        A1 -- "theme prop" --> A3
+        A2 -- "theme prop" --> A4
+        A3 -- "theme prop" --> A5
+        A4 -- "theme prop" --> A6
+    end
+    subgraph context ["Context ✅"]
+        B1["App\n‹ThemeContext value='dark'›"]
+        B2[Layout]
+        B3[Sidebar]
+        B4[Header]
+        B5[Nav]
+        B6["Logo\nuse(ThemeContext)"]
+        B7["MenuItem\nuse(ThemeContext)"]
+        B1 --> B2
+        B1 --> B3
+        B2 --> B4
+        B3 --> B5
+        B4 --> B6
+        B5 --> B7
+        B1 -. "teleports directly" .-> B6
+        B1 -. "teleports directly" .-> B7
+    end
 ```
 
 The data "teleports" from provider to consumer, skipping all intermediate components.

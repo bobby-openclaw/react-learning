@@ -89,38 +89,24 @@ useEffect(() => {
 
 Here's the complete lifecycle visualized:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         useEffect LIFECYCLE TIMELINE                         │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  MOUNT                        UPDATE                       UNMOUNT          │
-│    │                            │                             │              │
-│    ▼                            ▼                             ▼              │
-│ ┌──────┐                    ┌──────┐                      ┌──────┐          │
-│ │Render│                    │Render│                      │      │          │
-│ └──┬───┘                    └──┬───┘                      │      │          │
-│    │                           │                          │      │          │
-│    ▼                           ▼                          │      │          │
-│ ┌──────┐                    ┌──────┐                      │      │          │
-│ │Commit│                    │Commit│                      │      │          │
-│ │to DOM│                    │to DOM│                      │      │          │
-│ └──┬───┘                    └──┬───┘                      │      │          │
-│    │                           │                          │      │          │
-│    ▼                           ▼                          ▼      │          │
-│ ┌──────┐    deps changed?   ┌──────┐                   ┌──────┐ │          │
-│ │Effect│◀── YES ───────────▶│Cleanup│──────────────────▶│Cleanup│ │          │
-│ │ runs │                    │ runs │                   │ runs │ │          │
-│ └──────┘                    └──┬───┘                   └──────┘ │          │
-│                                │                                 │          │
-│                                ▼                                 │          │
-│                             ┌──────┐                             │          │
-│                             │Effect│                             │          │
-│                             │ runs │                             │          │
-│                             └──────┘                             │          │
-│                                                                              │
-│  TIME ─────────────────────────────────────────────────────────────────────▶ │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+sequenceDiagram
+    participant M as MOUNT
+    participant U as UPDATE
+    participant X as UNMOUNT
+
+    M->>M: Render
+    M->>M: Commit to DOM
+    M->>M: Effect runs
+
+    Note over U: deps changed?
+    U->>U: Render
+    U->>U: Commit to DOM
+    U->>U: Cleanup runs (previous effect)
+    U->>U: Effect runs (new)
+
+    X->>X: Cleanup runs (final)
 ```
 
 #### The Three Dependency Array Flavors
