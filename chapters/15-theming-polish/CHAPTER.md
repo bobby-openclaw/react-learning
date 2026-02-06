@@ -168,22 +168,17 @@ Without `twMerge`, Tailwind classes from props would *add* to component classes 
 
 shadcn's `<Sidebar>` component provides a complete navigation pattern:
 
-```
-┌──────────────────────────────────────────────┐
-│ ┌──────────┐ ┌────────────────────────────┐  │
-│ │          │ │                            │  │
-│ │  Logo    │ │       Main Content         │  │
-│ │          │ │                            │  │
-│ │  ──────  │ │                            │  │
-│ │  Tasks   │ │                            │  │
-│ │  Calendar│ │                            │  │
-│ │  Settings│ │                            │  │
-│ │          │ │                            │  │
-│ │          │ │                            │  │
-│ │  ──────  │ │                            │  │
-│ │  Profile │ │                            │  │
-│ └──────────┘ └────────────────────────────┘  │
-└──────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'default'}}%%
+block-beta
+  columns 3
+  block:layout["Application Shell"]:3
+    block:sidebar["Sidebar<br/>───<br/>Logo<br/>───<br/>Tasks<br/>Calendar<br/>Settings<br/>───<br/>Profile"]:1
+    end
+    space
+    block:main["Main Content"]:1
+    end
+  end
 ```
 
 Key sidebar features:

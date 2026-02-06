@@ -53,13 +53,13 @@ Don't create a component for every `<div>`. Premature abstraction is real:
 Props drilling is when you pass data through multiple layers of components to reach a deeply nested one:
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 graph TD
-    App["**App**\nstate: tasks, onToggle, onDelete"]
-    Main["**Main** ⚠️\nreceives props, uses NONE\n(just passes through!)"]
-    TS["**TaskSection** ⚠️\nreceives props, uses NONE\n(just passes through!)"]
-    TL["**TaskList**\nreceives props\nuses: tasks (maps over them)"]
-    TC["**TaskCard** ✅\nreceives: task, onToggle, onDelete\nuses: ALL"]
+    App["**App**<br/>state: tasks, onToggle, onDelete"]
+    Main["**Main** ⚠️<br/>receives props, uses NONE<br/>(just passes through!)"]
+    TS["**TaskSection** ⚠️<br/>receives props, uses NONE<br/>(just passes through!)"]
+    TL["**TaskList**<br/>receives props<br/>uses: tasks (maps over them)"]
+    TC["**TaskCard** ✅<br/>receives: task, onToggle, onDelete<br/>uses: ALL"]
     App -- "tasks, onToggle, onDelete" --> Main
     Main -- "tasks, onToggle, onDelete" --> TS
     TS -- "tasks, onToggle, onDelete" --> TL

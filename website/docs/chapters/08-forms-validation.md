@@ -100,13 +100,13 @@ React 19 lets you pass an async function directly to `<form action>`:
 Here's what happens under the hood:
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 flowchart TD
-    A["👆 User clicks Submit"] --> B["React 19 intercepts\nCollects FormData"]
-    B --> C["async action fn\nreceives FormData"]
+    A["👆 User clicks Submit"] --> B["React 19 intercepts<br/>Collects FormData"]
+    B --> C["async action fn<br/>receives FormData"]
     B --> D["isPending: true"]
     C --> E["await saveTask()"]
-    E --> F["isPending: false\nform reset"]
+    E --> F["isPending: false<br/>form reset"]
     E --> G["success / error"]
 ```
 

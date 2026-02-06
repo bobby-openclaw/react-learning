@@ -43,7 +43,7 @@ Context is React's built-in dependency injection. It has three parts:
 3. **Consume** — any descendant reads the value directly
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 graph TD
     subgraph drilling ["Props Drilling ❌"]
         A1["App (theme)"]
@@ -59,13 +59,13 @@ graph TD
         A4 -- "theme prop" --> A6
     end
     subgraph context ["Context ✅"]
-        B1["App\n‹ThemeContext value='dark'›"]
+        B1["App<br/>‹ThemeContext value='dark'›"]
         B2[Layout]
         B3[Sidebar]
         B4[Header]
         B5[Nav]
-        B6["Logo\nuse(ThemeContext)"]
-        B7["MenuItem\nuse(ThemeContext)"]
+        B6["Logo<br/>use(ThemeContext)"]
+        B7["MenuItem<br/>use(ThemeContext)"]
         B1 --> B2
         B1 --> B3
         B2 --> B4

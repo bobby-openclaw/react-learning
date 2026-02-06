@@ -33,12 +33,12 @@ When you call `setValue(newValue)`:
 3. On re-render, `useState` returns the new value
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 flowchart LR
-    R1["**RENDER #1**\n\ncount = 0\n‹button›\nCount: 0"]
-    E["**EVENT**\n\nsetCount(1)\nstores new value"]
-    R2["**RENDER #2**\n\ncount = 1\n‹button›\nCount: 1"]
-    R1 -- "click" --> E -- "react re-runs\ncomponent" --> R2
+    R1["**RENDER #1**<br/><br/>count = 0<br/>‹button›<br/>Count: 0"]
+    E["**EVENT**<br/><br/>setCount(1)<br/>stores new value"]
+    R2["**RENDER #2**<br/><br/>count = 1<br/>‹button›<br/>Count: 1"]
+    R1 -- "click" --> E -- "react re-runs<br/>component" --> R2
     R2 -. "cycle continues..." .-> R1
 ```
 

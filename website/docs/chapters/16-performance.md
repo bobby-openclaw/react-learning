@@ -36,15 +36,15 @@ If step 2 never happens, skip steps 3 and 4. Seriously.
 Remember from Chapter 0:
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 flowchart TD
-    R["**RE-RENDER**\n~0.1ms cheap"] --> D["**DIFF**\n~0.1ms cheap"] --> C["**DOM COMMIT**\n1-10ms+ EXPENSIVE"]
+    R["**RE-RENDER**<br/>~0.1ms cheap"] --> D["**DIFF**<br/>~0.1ms cheap"] --> C["**DOM COMMIT**<br/>1-10ms+ EXPENSIVE"]
     R --> OPT
 
     subgraph OPT ["OPTIMIZATION STRATEGIES"]
         direction LR
-        SKIP["**Skip the Re-render**\n• React.memo()\n• Move state down\n• Lift content up\n• React Compiler 🆕"]
-        FAST["**Make it Faster**\n• useMemo() for expensive calcs\n• Lazy state initialization\n• Derive during render\n• Code splitting (React.lazy)"]
+        SKIP["**Skip the Re-render**<br/>• React.memo()<br/>• Move state down<br/>• Lift content up<br/>• React Compiler 🆕"]
+        FAST["**Make it Faster**<br/>• useMemo() for expensive calcs<br/>• Lazy state initialization<br/>• Derive during render<br/>• Code splitting (React.lazy)"]
     end
 ```
 

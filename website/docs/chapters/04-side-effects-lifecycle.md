@@ -96,7 +96,7 @@ useEffect(() => {
 Here's the complete lifecycle visualized:
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 sequenceDiagram
     participant M as MOUNT
     participant U as UPDATE

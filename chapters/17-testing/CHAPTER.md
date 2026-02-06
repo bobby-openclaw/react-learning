@@ -12,16 +12,15 @@
 
 Forget the testing pyramid. In React, Kent C. Dodds' **testing trophy** is the mental model:
 
-```
-          ╭──────────╮
-          │  E2E     │  ← Few (slow, expensive, high confidence)
-        ╭─┴──────────┴─╮
-        │ Integration   │  ← MOST TESTS HERE
-      ╭─┴──────────────┴─╮
-      │   Component       │  ← Moderate amount
-    ╭─┴──────────────────┴─╮
-    │   Static Analysis     │  ← TypeScript + ESLint (free!)
-    ╰──────────────────────╯
+```mermaid
+%%{init: {'theme':'default'}}%%
+graph TD
+  E2E["🔝 E2E<br/>Few — slow, expensive, high confidence"]
+  INT["⭐ Integration<br/>MOST TESTS HERE"]
+  COMP["Component<br/>Moderate amount"]
+  STATIC["Static Analysis<br/>TypeScript + ESLint — free!"]
+  E2E --- INT --- COMP --- STATIC
+  style INT fill:#22c55e,color:#fff
 ```
 
 **Where to focus:**

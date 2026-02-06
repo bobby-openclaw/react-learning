@@ -12,20 +12,16 @@
 
 shadcn's `<Form>` component isn't just a styled `<form>`. It's an orchestration layer that connects three powerful libraries:
 
-```
-┌─────────────────────────────────────┐
-│           shadcn Form               │  ← styled, accessible UI
-│  ┌───────────────────────────────┐  │
-│  │      React Hook Form          │  │  ← form state management
-│  │  ┌─────────────────────────┐  │  │
-│  │  │         Zod              │  │  │  ← schema validation
-│  │  └─────────────────────────┘  │  │
-│  └───────────────────────────────┘  │
-│                                     │
-│  FormField → FormItem → FormLabel   │
-│  FormControl → FormDescription      │
-│  FormMessage (auto error display)   │
-└─────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'default'}}%%
+block-beta
+  columns 1
+  block:form["shadcn Form — styled, accessible UI"]
+    block:rhf["React Hook Form — form state management"]
+      zod["Zod — schema validation"]
+    end
+    components["FormField → FormItem → FormLabel<br/>FormControl → FormDescription<br/>FormMessage (auto error display)"]
+  end
 ```
 
 **Why this stack?**

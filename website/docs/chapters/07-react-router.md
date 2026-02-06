@@ -72,7 +72,7 @@ React Router uses a component-based approach. Here's the hierarchy:
 Here's how URLs map to components:
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 flowchart LR
     U1["/"] --> M1["'/' index"] --> R1["Layout + Dashboard"]
     U2["/settings"] --> M2["'/settings'"] --> R2["Layout + Settings"]
@@ -87,17 +87,17 @@ flowchart LR
 
 This is where React Router shines. **Nested routes** let you create persistent layouts — a sidebar that stays visible while the main content changes.
 
-```
-┌─────────────────────────────────┐
-│  <Layout />                     │
-│  ┌──────┐ ┌──────────────────┐  │
-│  │ Nav  │ │ <Outlet />       │  │
-│  │      │ │                  │  │
-│  │ Home │ │ (child route     │  │
-│  │ Tasks│ │  renders here)   │  │
-│  │ Cog  │ │                  │  │
-│  └──────┘ └──────────────────┘  │
-└─────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'default'}}%%
+block-beta
+  columns 3
+  block:layout["&lt;Layout /&gt;"]:3
+    block:nav["Nav<br/>───<br/>Home<br/>Tasks<br/>Settings"]:1
+    end
+    space
+    block:outlet["&lt;Outlet /&gt;<br/><br/>(child route renders here)"]:1
+    end
+  end
 ```
 
 The parent route renders a `<Layout />` component with an `<Outlet />`. The child route's component gets rendered *inside* that `<Outlet />`. The layout persists — navigation, sidebar, header — while only the content area changes.

@@ -184,28 +184,50 @@ Something causes a re-render:
 
 React calls your component function. It returns JSX, which becomes a tree of React elements (plain JS objects). This tree is the **Virtual DOM** — a lightweight copy of what the UI *should* look like.
 
-```
-Virtual DOM (new)          Virtual DOM (previous)
-      <div>                      <div>
-      /    \                     /    \
-   <h1>   <ul>               <h1>   <ul>
-   "3"    / | \               "2"    / | \
-       <li><li><li>               <li><li>
+```mermaid
+%%{init: {'theme':'default'}}%%
+graph TD
+  subgraph new["Virtual DOM (new)"]
+    A1["&lt;div&gt;"] --> B1["&lt;h1&gt; '3'"]
+    A1 --> C1["&lt;ul&gt;"]
+    C1 --> D1["&lt;li&gt;"]
+    C1 --> E1["&lt;li&gt;"]
+    C1 --> F1["&lt;li&gt;"]
+  end
+  subgraph prev["Virtual DOM (previous)"]
+    A2["&lt;div&gt;"] --> B2["&lt;h1&gt; '2'"]
+    A2 --> C2["&lt;ul&gt;"]
+    C2 --> D2["&lt;li&gt;"]
+    C2 --> E2["&lt;li&gt;"]
+  end
 ```
 
 #### Step 3: Reconciliation (Diffing)
 
 React compares the new virtual DOM with the previous one. It finds the **minimum set of changes**:
 
-```
-    PREVIOUS VDOM              NEW VDOM                 DIFF RESULT
-    ─────────────              ────────                 ───────────
-        <div>                    <div>
-        /    \                   /    \
-     <h1>    <ul>    ──→     <h1>    <ul>         • Update <h1> text: "2" → "3"
-     "2"    /   \            "3"    / | \         • Append new <li>
-          <li> <li>              <li><li><li>
-          "A"  "B"               "A" "B" "C"
+```mermaid
+%%{init: {'theme':'default'}}%%
+graph LR
+  subgraph prev["PREVIOUS VDOM"]
+    P1["&lt;div&gt;"] --> P2["&lt;h1&gt; '2'"]
+    P1 --> P3["&lt;ul&gt;"]
+    P3 --> P4["&lt;li&gt; 'A'"]
+    P3 --> P5["&lt;li&gt; 'B'"]
+  end
+  subgraph new2["NEW VDOM"]
+    N1["&lt;div&gt;"] --> N2["&lt;h1&gt; '3'"]
+    N1 --> N3["&lt;ul&gt;"]
+    N3 --> N4["&lt;li&gt; 'A'"]
+    N3 --> N5["&lt;li&gt; 'B'"]
+    N3 --> N6["&lt;li&gt; 'C'"]
+  end
+  subgraph diff["DIFF RESULT"]
+    R1["Update &lt;h1&gt;: '2' → '3'"]
+    R2["Append &lt;li&gt; 'C'"]
+  end
+  prev --> diff
+  new2 --> diff
 ```
 
 This is called **reconciliation** or "diffing." React uses clever heuristics:
@@ -218,12 +240,12 @@ This is called **reconciliation** or "diffing." React uses clever heuristics:
 React applies **only the calculated changes** to the real DOM:
 
 ```mermaid
-%%{init: {'theme': 'default', 'look': 'handDrawn'}}%%
+%%{init: {'theme':'default'}}%%
 flowchart LR
-    T["**TRIGGER**\n\n• setState()\n• Initial load\n• Parent re-render"]
-    R["**RENDER**\n\n• Call component functions\n• Build new VDOM\n• (JS objects, NOT DOM)"]
-    D["**DIFF**\n\n• Compare old vs new VDOM\n• Find minimum changes"]
-    C["**COMMIT**\n\n• Apply only changes to real DOM\n• Browser repaints"]
+    T["**TRIGGER**<br/><br/>• setState()<br/>• Initial load<br/>• Parent re-render"]
+    R["**RENDER**<br/><br/>• Call component functions<br/>• Build new VDOM<br/>• (JS objects, NOT DOM)"]
+    D["**DIFF**<br/><br/>• Compare old vs new VDOM<br/>• Find minimum changes"]
+    C["**COMMIT**<br/><br/>• Apply only changes to real DOM<br/>• Browser repaints"]
     T --> R --> D --> C
 ```
 

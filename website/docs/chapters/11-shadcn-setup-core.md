@@ -56,21 +56,15 @@ shadcn/ui components are built on two foundations:
 
 **Tailwind CSS** — All visual styling. Radix provides the behavior, Tailwind provides the look.
 
-```
-┌─────────────────────────────────┐
-│  shadcn/ui component            │
-│  ┌───────────────────────────┐  │
-│  │  Radix Primitive          │  │
-│  │  (accessibility, behavior)│  │
-│  └───────────────────────────┘  │
-│  ┌───────────────────────────┐  │
-│  │  Tailwind classes         │  │
-│  │  (visual styling)         │  │
-│  └───────────────────────────┘  │
-│  ┌───────────────────────────┐  │
-│  │  cva (variant management) │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'default'}}%%
+block-beta
+  columns 1
+  block:comp["shadcn/ui component"]:1
+    radix["Radix Primitive<br/>(accessibility, behavior)"]
+    tailwind["Tailwind classes<br/>(visual styling)"]
+    cva["cva (variant management)"]
+  end
 ```
 
 ### 4. class-variance-authority (cva) — Component Variants
